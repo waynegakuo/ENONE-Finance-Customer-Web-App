@@ -11,10 +11,6 @@ admin.initializeApp(functions.config().firebase);
 //   response.send("Hello from Firebase!");
 // });
 
-export const greetingsCall = functions.https.onCall(() => {
-    return ('Message from Wayne');
-});
-
 export const addAdminRole = functions.https.onCall((data, context) => {
     if (context.auth?.token.admin !== true) {
         return { error: 'Only admins can add other admins' }

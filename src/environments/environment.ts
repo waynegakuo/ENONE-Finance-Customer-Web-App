@@ -5,13 +5,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBVAOytA4VDYw0Xhjz9N_6PSna8QwBuV10",
-    authDomain: "enone-e836b.firebaseapp.com",
-    projectId: "enone-e836b",
-    storageBucket: "enone-e836b.appspot.com",
-    messagingSenderId: "154682659108",
-    appId: "1:154682659108:web:bf5219ae24cf2760fda3b1",
-    measurementId: "G-467P36Z2Y8"
+    // Paste your Firebase SDK content here
   }
 };
 

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    // Paste the contnents here
+    // Paste your Firebase SDK content here
   }
 };

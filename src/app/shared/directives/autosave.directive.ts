@@ -153,7 +153,6 @@ export class AutosaveDirective implements OnInit, OnDestroy {
       .pipe(
         tap(doc => {
           if (doc) {
-            console.log(doc);
             this.formGroup.patchValue(doc);
             this.formGroup.markAsPristine();
             this.stateSet = 'synced';

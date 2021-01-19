@@ -895,10 +895,8 @@ export class LoanapplicationService implements OnDestroy {
       .subscribe(checkedValue => {
         if (checkedValue === 'Business Loan') {
           this.isBusinessLoan = true;
-          console.log(checkedValue);
         } else {
           this.isBusinessLoan = false;
-          console.log(checkedValue);
         }
       });
 
@@ -907,10 +905,8 @@ export class LoanapplicationService implements OnDestroy {
       .subscribe(checkedValue => {
         if (checkedValue === 'Yes') {
           this.hasOtherInstitution = true;
-          console.log(checkedValue);
         } else {
           this.hasOtherInstitution = false;
-          console.log(checkedValue);
         }
       });
 
