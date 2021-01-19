@@ -32,7 +32,7 @@ Follow the rest of the steps [here](https://firebase.google.com/docs/cli#windows
 
 If you wish to have this project on your machine, use the following command:
 
-    git clone git@github.com:waynegakuo/ENONE-Finance-Customer-Web-App.git
+    git clone https://github.com/Foondi/ENONE-Finance-Customer-Web-App-Client.git
 
 ## Installing Dependencies
 
