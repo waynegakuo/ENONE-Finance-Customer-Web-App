@@ -1,0 +1,245 @@
+<h3>Loan Documents</h3>
+<div class="content">
+    <form [formGroup]="loanTempSelect">
+        <label>Select the Loan Document Template <span class="asterix">*</span></label>
+        <select name="repaymentSchedule" formControlName="template">
+            <option value="Board Resolution">Board Resolution Template</option>
+            <option value="Final Demand">Final Demand Letter</option>
+            <option value="Lender Addednum">Lender Addendum to Master Agreement</option>
+            <option value="Lender Loan">Lender Loan Master Agreement</option>
+            <option value="Letter of Offer">Letter of Offer Template</option>
+            <option value="Personal Guarantee">Personal Guarantee Template</option>
+        </select>
+    </form>
+
+    <form *ngIf="boardResolution" [formGroup]="this.boardRes.boardResolutionForm" (ngSubmit)="boardResolutionLetter()">
+        <!-- {{ this.boardRes.boardResolutionForm.value | json }} -->
+        <label>Company Location <span class="asterix">*</span></label>
+        <input type="text" formControlName="location" placeholder="Company's Location">
+        <label>Company Name <span class="asterix">*</span></label>
+        <input type="text" placeholder="Company Name" formControlName="companyName">
+
+        <label>In attendance: <span class="asterix">*</span></label>
+        <div class="attendance">
+            <input type="text" placeholder="Chairman" formControlName="chairman">
+            <input type="text" placeholder="Director 1" formControlName="director1">
+            <input type="text" placeholder="Director 2" formControlName="director2">
+            <input type="text" placeholder="Company Secretary" formControlName="secretary">
+        </div>
+
+        <label>Borrower <span class="asterix">*</span></label>
+        <input type="text" placeholder="Borrower's Name" formControlName="borrower">
+        <label>Reference Number <span class="asterix">*</span></label>
+        <input type="text" placeholder="Reference Number" formControlName="referenceNo">
+        <label>Offer Letter <span class="asterix">*</span></label>
+        <input type="text" placeholder="Offer Letter" formControlName="offerLetter">
+        <label>Lender Name <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender's Name" formControlName="lenderName">
+        <label>Total Loan Exposure <span class="asterix">*</span></label>
+        <input type="number" placeholder="Loan Exposure" formControlName="loanExposure">
+        <label>Vehicle Registration Number <span class="asterix">*</span></label>
+        <input type="text" placeholder="Vehicle Reg. Number" formControlName="vehicleRegistration">
+        <label>Credit Insurance Loan Exposure <span class="asterix">*</span></label>
+        <input type="number" placeholder="Credit Insurance Loan Exposure" formControlName="creditLoanExposure">
+        <label>Legal Charge over Property LR NO. <span class="asterix">*</span></label>
+        <input type="text" placeholder="Propery Number" formControlName="propertyNo">
+        <label>Director/Company Secretary <span class="asterix">*</span></label>
+        <input type="text" placeholder="Director's/Company Secretary's Name" formControlName="director_sec">
+
+        <input type="submit" value="Generate Board Resolution Form">
+
+    </form>
+
+    <form *ngIf="finalDemand" [formGroup]="this.finalDem.finalDemandForm" (ngSubmit)="finalDemandLetter()">
+        <label>Reference Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Reference Number" formControlName="referenceNo">
+        <label>Customer Company Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Company Name" formControlName="companyName">
+        <label>Customer Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Postal Address" formControlName="postalAddress">
+        <label>City: <span class="asterix">*</span></label>
+        <input type="text" placeholder="City" formControlName="city">
+        <label>Country: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Country" formControlName="country">
+        <label>Date Account went in Arrears: <span class="asterix">*</span></label>
+        <div class="date-picker">
+            <input [matDatepicker]="pickerArrears" formControlName="dateInArrears" type="text">
+            <mat-datepicker-toggle matSuffix [for]="pickerArrears"></mat-datepicker-toggle>
+            <mat-datepicker #pickerArrears></mat-datepicker>
+        </div>
+
+        <label>Customer Loan Account Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Loan Account Number" formControlName="loanAccountNumber">
+        <label>Arrears <span class="asterix">*</span></label>
+        <input type="number" placeholder="Arrears" formControlName="arrears">
+        <label>Total Amount Outstanding: <span class="asterix">*</span></label>
+        <input type="number" placeholder="Total Outstanding" formControlName="totalOutstanding">
+        <label>Interest Rate P.M. <span class="asterix">*</span></label>
+        <input type="number" placeholder="%" formControlName="interestRate">
+        <label>Name of Credit Officer: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Credit Officer" formControlName="creditOfficer">
+
+        <input type="submit" value="Generate Final Demand Letter">
+    </form>
+
+    <form *ngIf="lenderAddendum" [formGroup]="this.lenderAddend.lenderAddendumForm" (ngSubmit)="lenderAddendumLetter()">
+        <!-- {{ this.lenderAddend.lenderAddendumForm.value | json }} -->
+        <label>Lender's Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender Name" formControlName="lenderName">
+        <label>Lender's ID Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender ID No" formControlName="lenderIdNo">
+        <label>Lender's KRA Pin: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender KRA Pin" formControlName="lenderKRAPin">
+        <label>Lender's Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender Postal Address" formControlName="lenderPostalAddress">
+        <label>Lender's Physical Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender Physical Address" formControlName="lenderPhysicalAddress">
+        <label>Borrower's Name:</label>
+        <input type="text" placeholder="Borrower's Name" formControlName="borrowerName">
+        <label>Borrower's Registration Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Borrower Reg No" formControlName="borrowerRegNo">
+        <label>Borrower's KRA Pin:</label>
+        <input type="text" placeholder="Borrower KRA Pin" formControlName="borrowerKRAPin">
+        <label>Borrower's Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Borrower Postal Address" formControlName="borrowerPostalAddress">
+        <label>Borrower's Physical Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Borrower Physical Address" formControlName="borrowerPhysicalAddress">
+        <label>Borrower's CEO Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Borrowe CEO Name" formControlName="borrowerCEOName">
+        <label>Finance Loan Amount: <span class="asterix">*</span></label>
+        <input type="number" placeholder="Finance Loan Amount" formControlName="financeLoanAmount">
+        <label>Finance Loan Duration (in months): <span class="asterix">*</span></label>
+        <input type="text" placeholder="FInance Loan Duration" formControlName="financeLoanDuration">
+        <label>Finance Loan Interest Rate: <span class="asterix">*</span></label>
+        <input type="number" placeholder="%" formControlName="financeInterestRate">
+        <label>Finance Loan Start Date: <span class="asterix">*</span></label>
+        <div class="date-picker">
+            <input [matDatepicker]="financeLoanStart" type="text" formControlName="financeStartDate">
+            <mat-datepicker-toggle matSuffix [for]="financeLoanStart"></mat-datepicker-toggle>
+            <mat-datepicker #financeLoanStart></mat-datepicker>
+        </div>
+        <label>Finance Loan End Date: <span class="asterix">*</span></label>
+        <div class="date-picker">
+            <input [matDatepicker]="financeLoanEnd" type="text" formControlName="financeEndDate">
+            <mat-datepicker-toggle matSuffix [for]="financeLoanEnd"></mat-datepicker-toggle>
+            <mat-datepicker #financeLoanEnd></mat-datepicker>
+        </div>
+
+        <label>Signature Location (where this document is being signed): <span class="asterix">*</span></label>
+        <input type="text" placeholder="Signature Location" formControlName="signLocation">
+
+        <input type="submit" value="Generate Lender Addendum to Master Agreement">
+    </form>
+
+    <form *ngIf="lenderLoan" [formGroup]="this.lenderLoanMaster.lenderLoanForm" (ngSubmit)="lenderLoanMasterLetter()">
+        <label>Lender's/Individual's Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender Name" formControlName="lenderName">
+        <label>Borrower's Company Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Borrower Company Name" formControlName="borrowerCompanyName">
+        <label>Borrower's Company Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Borrower Company Postal Address" formControlName="borrowerCompanyPostalAddress">
+        <label>Lender's ID Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender ID No" formControlName="lenderIdNo">
+        <label>Lender's Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Lender Postal Address" formControlName="lenderPostalAddress">
+
+        <input type="submit" value="Generate Lende Loan Master Agreement">
+    </form>
+
+    <form *ngIf="letterOffer" [formGroup]="this.letterOfOffer.letterOfOfferForm" (ngSubmit)="letterOfOfferLetter()">
+        <label>Reference Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Ref No" formControlName="refNo">
+        <label>Contact Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Contact Name" formControlName="contactName">
+        <label>Customer Company Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Customer Company Name" formControlName="customerCompanyName">
+        <label>Customer Company Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Customer Company Postal Address" formControlName="customerCompanyPostalAddress">
+        <label>City: <span class="asterix">*</span></label>
+        <input type="text" placeholder="City" formControlName="city">
+        <label>Country: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Country" formControlName="country">
+        <label>Salutation: <span class="asterix">*</span></label>
+        <select formControlName="salutation">
+            <option value="Sir">Sir</option>
+            <option value="Madam">Madam</option>
+        </select>
+
+        <label>Main Company Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Main Company Name" formControlName="mainCompanyName">
+        <label>Main Company Bank Account Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Main Company Bank Acc Name" formControlName="mainCompanyBankAccName">
+        <label>Main Company Bank Account Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Main Company Bank Acc No" formControlName="mainCompanyBankAccNumber">
+        <label>Safaricom Paybill Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Paybill No" formControlName="paybillNumber">
+        <label>Guarantor 1 (Male): <span class="asterix">*</span></label>
+        <input type="text" placeholder="Male Guarantor" formControlName="guarantorMale">
+        <label>Guarantor 2 (Female): <span class="asterix">*</span></label>
+        <input type="text" placeholder="Female Guarantor" formControlName="guarantorFemale">
+        <label>Loan Type: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Loan Type" formControlName="loanType">
+        <label>Loan Amount In Numbers: <span class="asterix">*</span></label>
+        <input type="number" placeholder="Amount in numbers" formControlName="numericalLoanAmount">
+        <label>Loan Amount in Words: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Amount in words" formControlName="wordsLoanAmount">
+        <label>Total Loan Amount in Numbers: <span class="asterix">*</span></label>
+        <input type="number" placeholder="Total amount in numbers" formControlName="numericalTotalLoanAmount">
+        <label>Total Loan Amount in Words: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Total amount in words" formControlName="wordsTotalLoanAmount">
+        <label>Loan Purpose: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Loan Purpose" formControlName="loanPurpose">
+        <label>Loan Repayment Term: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Repayment Term" formControlName="loanRepaymentTerm">
+        <label>Loan Interest Rate: <span class="asterix">*</span></label>
+        <input type="text" placeholder="%" formControlName="loanInterestRate">
+        <label>Penalty Interest Rate: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Penalty interest rate (%)" formControlName="penaltyInterestRate">
+        <label>Processing Fee Rate: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Process Fee Rate" formControlName="processFeeRate">
+        <label>3rd Party Changes Fees Amount: <span class="asterix">*</span></label>
+        <input type="text" placeholder="3rd Party Changes Fees Amount" formControlName="thirdPartyChangesFeeAmount">
+        <label>Credit Officer Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Credit Officer Name" formControlName="creditOfficerName">
+        <label>CEO Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="CEO Name" formControlName="CEOName">
+
+        <input type="submit" value="Generate Letter of Offer Document">
+    </form>
+
+    <form *ngIf="personalGuarantee" [formGroup]="this.personalGuarant.personalGuaranteeForm"
+        (ngSubmit)="personalGuaranteeLetter()">
+        <label>Reference Number: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Reference No" formControlName="refNo">
+        <label>Main Company CEO Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Main Company CEO Name" formControlName="mainCompanyCEOName">
+        <label>Main Company Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Main Company Name" formControlName="mainCompanyName">
+        <label>Main Company Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Main Company Postal Address" formControlName="mainCompanyPostalAddress">
+        <label>City: <span class="asterix">*</span></label>
+        <input type="text" placeholder="City" formControlName="city">
+        <label>Country: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Country" formControlName="country">
+        <label>Salutation: <span class="asterix">*</span></label>
+        <select formControlName="salutation">
+            <option value="Sir">Sir</option>
+            <option value="Madam">Madam</option>
+        </select>
+
+        <label>Guarantee Amount: <span class="asterix">*</span></label>
+        <input type="number" placeholder="Guarantee Amount" formControlName="guaranteeAmount">
+        <label>Customer Company Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Customer Company Name" formControlName="customerCompanyName">
+        <label>Guarantor's Name: </label>
+        <input type="text" placeholder="Guarantor Name" formControlName="guarantorName">
+        <label>Guarantor's ID No: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Guarantor ID No" formControlName="guarantorIdNo">
+        <label>Gurantor's Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Guarantor Postal Address" formControlName="guarantorPostalAddress">
+        <label>Loan Amount of Customer Company: <span class="asterix">*</span></label>
+        <input type="number" placeholder="Loan Amount of Customer Company" formControlName="customerLoanAmount">
+
+        <input type="submit" value="Generate Personal Guarantee Document">
+    </form>
+</div>

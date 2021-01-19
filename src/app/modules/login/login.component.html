@@ -1,0 +1,46 @@
+<div class="content">
+    <div class="login-section">
+        <div class="logo">
+            <img src="../../../assets/images/edge_three_sixty_logo.jpg" alt="ENONE Logo">
+        </div>
+        <section class="content_section_form">
+            <div class="login_section_head">
+                <h2 class="title">Login</h2>
+            </div>
+            <form [formGroup]="this.auth.loginForm" class="content_section_login_form" (ngSubmit)="loginUser()">
+                <input type="email" id="email" placeholder="example@gmail.com" formControlName="email"
+                    [ngClass]="{'is-invalid': this.auth.loginEmail.invalid && this.auth.loginEmail.touched}">
+                <div *ngIf="this.auth.loginEmail.invalid && this.auth.loginEmail.touched">
+                    <small *ngIf="this.auth.loginEmail.errors?.required" class="text-danger">Email is required</small>
+                </div>
+
+                <input type="password" id="password" placeholder="Password" formControlName="password"
+                    [ngClass]="{'is-invalid': this.auth.loginPassword.invalid && this.auth.loginPassword.touched}">
+                <div *ngIf="this.auth.loginPassword.invalid && this.auth.loginPassword.touched">
+                    <small *ngIf="this.auth.loginPassword.errors?.required" class="text-danger">Password is
+                        required</small>
+                </div>
+
+                <small *ngIf="errorMsg" class="error-msg">{{errorMsg}}</small>
+
+                <input type="submit" value="Login" [disabled]="this.auth.loginForm.invalid">
+            </form>
+
+            <div class="footer_item">
+                <a class="pwd" [routerLink]="['../forgot-password']" routerLinkActive="router-link-active">Forgot
+                    Password?</a>
+                <div class="divider">
+                    <span class="separator"></span>
+                    <span>OR</span>
+                    <span class="separator"></span>
+                </div>
+                <a class="signup" [routerLink]="['../sign-up']" routerLinkActive="router-link-active">First time here?
+                    Create an account</a>
+            </div>
+        </section>
+    </div>
+
+    <div class="login-illustration">
+        <img src="../../../assets/images/authenticaton.svg" alt="">
+    </div>
+</div>

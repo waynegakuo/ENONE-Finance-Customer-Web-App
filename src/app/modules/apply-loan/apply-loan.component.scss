@@ -1,0 +1,154 @@
+@import "../../../color";
+@import "../../../shadow";
+.asterix {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.is-invalid {
+    border: 1px solid red !important;
+    border-radius: 5px;
+}
+.text-danger {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mat-button-disabled {
+    cursor: not-allowed;
+    background: #ccc;
+}
+
+.file-picker {
+    display: flex;
+    flex-direction: row;
+    margin: 30px 0 30px 0;
+
+    > input[type="file"] {
+        #file-upload-button {
+            border-radius: 5px;
+        }
+    }
+}
+
+.mat-radio-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .mat-radio-button {
+        margin: 10px;
+    }
+}
+.another-applicant {
+    margin-top: 5rem;
+}
+.turnover {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .turnover-1,
+    .turnover-2 {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-right: 10px;
+    }
+}
+
+.date-range {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .date-range-1,
+    .date-range-2 {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 5px;
+        width: 45%;
+    }
+}
+
+.mat-datepicker-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border-top: $border-top;
+
+    button {
+        background-color: $primary;
+        color: white;
+        border: 0;
+        border-radius: 5px;
+        padding: 10px 25px;
+        font-weight: bold;
+        margin: 10px 0;
+        cursor: pointer;
+    }
+
+    .stepper {
+        form {
+            input[type="text"],
+            input[type="number"],
+            input[type="date"],
+            input[type="email"],
+            select,
+            option {
+                width: 30%;
+                padding: 12px 20px;
+                margin: 10px 0;
+                display: block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            .date-picker {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .checks {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                width: 50%;
+
+                .t-and-c {
+                    // padding: 0;
+                    display: flex;
+                    flex-direction: row;
+                    width: 40%;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    margin: 10px 0;
+                }
+                .data-privacy {
+                    margin: 10px 0;
+                    display: flex;
+                    flex-direction: row;
+                    width: 65%;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                }
+            }
+
+            .danger {
+                background-color: red;
+            }
+        }
+    }
+}

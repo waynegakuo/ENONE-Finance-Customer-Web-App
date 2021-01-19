@@ -1,0 +1,120 @@
+@import "../../../color";
+
+.nav-bar {
+    padding: 0;
+    margin: 0;
+    background-color: #ffffff;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    overflow: hidden;
+
+    img {
+        color: $primary;
+        margin: 0;
+        width: 5%;
+        cursor: pointer;
+    }
+
+    .burger {
+        display: none;
+    }
+
+    .burger:focus {
+        outline: none;
+    }
+
+    ul {
+        display: flex;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            margin: 0 10px;
+            cursor: pointer;
+
+            a {
+                text-decoration: none;
+                color: $primary;
+                font-weight: bold;
+                position: relative;
+
+                &.bold {
+                    padding: 10px 27px !important;
+                    font-weight: bold;
+                    border: 1px solid $primary;
+                    border-radius: 5px;
+                }
+
+                &.button {
+                    padding: 10px 27px !important;
+                    box-sizing: border-box;
+                    color: white;
+                    background: $primary;
+                    // border: 1px solid $primary;
+                    border-radius: 5px;
+                }
+            }
+
+            a::after {
+                content: "";
+                background-color: $primary;
+                position: absolute;
+                left: 0;
+                bottom: -18px;
+                height: 2px;
+                width: 100%;
+                opacity: 0;
+                transition: transform 0.2s ease;
+            }
+        }
+
+        li .nav_link:hover::after {
+            transform: translateY(-15px);
+            opacity: 1;
+        }
+
+        .active ~ span {
+            display: flex;
+            border-bottom: 1.5px solid $primary;
+            z-index: 1;
+        }
+    }
+}
+
+/* responsiveness */
+@media (max-width: 480px) {
+    .nav-bar {
+        img {
+            width: 20%;
+        }
+        .burger {
+          display: block;
+          margin: 0 15px 10px 0;
+      }
+    }
+
+    nav ul {
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        flex-direction: column;
+        position: fixed;
+        top: 80px;
+        left: 10%;
+        width: 80%;
+        text-align: center;
+        transform: translateX(120%);
+        transition: transform 0.4s ease;
+    }
+
+    nav ul.show {
+        transform: translateX(0);
+    }
+
+    nav ul li {
+        margin: 15px;
+    }
+}

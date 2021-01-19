@@ -1,0 +1,53 @@
+<mat-nav-list>
+    <div class="profile-card">
+        <div class="header">
+            <h2>{{displayName}}</h2>
+            <h5>Admin</h5>
+        </div>
+        <img src="../../../../assets/images/user.png" alt="User">
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Menu</h2>
+    <a mat-list-item [routerLink]="['overview']" routerLinkActive="router-link-active">
+        <mat-icon>dashboard</mat-icon>
+        Overview
+    </a>
+    <a mat-list-item [routerLink]="['loan-products']" routerLinkActive="list-item-active">
+        <mat-icon>details</mat-icon>
+        Loan Products
+    </a>
+    <a mat-list-item [routerLink]="['loansapplied']" routerLinkActive="router-link-active">
+        <mat-icon>done</mat-icon>
+        Loans Applied
+    </a>
+    <a mat-list-item [routerLink]="['lenderprofiles']" routerLinkActive="router-link-active">
+        <mat-icon>supervised_user_circle</mat-icon>
+        Lender Profiles
+    </a>
+    <a mat-list-item [routerLink]="['templates']" routerLinkActive="router-link-active">
+        <mat-icon> attach_file</mat-icon>
+        Loan Documents
+    </a>
+    <!-- <a mat-list-item>
+        <mat-icon>done_all</mat-icon>
+        Approved Loans
+    </a> -->
+    <a mat-list-item [routerLink]="['repaid-loans']" routerLinkActive="router-link-active">
+        <mat-icon>payment</mat-icon>
+        Repaid Loans
+    </a>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Tools</h2>
+    <!-- <a mat-list-item routerLinkActive="list-item-active">
+        <mat-icon>security</mat-icon>
+        Security
+    </a> -->
+    <a mat-list-item [routerLink]="['tools']" routerLinkActive="list-item-active">
+        <mat-icon>build</mat-icon>
+        Loan Tools
+    </a>
+</mat-nav-list>

@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,KAAK,CAAC;EACF,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,MAAM,EAAE,IAAI;CACf;;AAED,AAAA,IAAI,CAAC;EAEH,OAAO,EAAE,IAAI;EACb,aAAa,EAAE,MAAM;CAEtB;;AAED,AAAA,CAAC,CAAC;EACE,WAAW,EAAE,MAAM;EACnB,SAAS,EAAE,KAAK;EAChB,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,MAAM;EACvB,KAAK,EAAE,IAAI;CACd;;AAED,AAAA,UAAU,CAAC;EACP,KAAK,EAAE,KAAK;CACf;;AAED,AAAA,oBAAoB,CAAC;EACjB,MAAM,EAAE,IAAI;CACf;;AAED,AAAA,kBAAkB,CAAC;EACf,OAAO,EAAE,IAAI;CAChB",
+    "sources": [
+        "dashboard.component.scss",
+        "../../../_color.scss",
+        "../../../_shadow.scss"
+    ],
+    "names": [],
+    "file": "dashboard.component.css"
+}

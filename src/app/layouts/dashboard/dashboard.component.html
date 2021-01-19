@@ -1,0 +1,19 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" closed #sidebar>
+    <app-sidebar [displayName]="displayName" [email]="email"></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <span>
+      <button mat-icon-button (click)="sidebar.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <p class="alert alert-primary alert_info" role="alert">Hello {{displayName}}, click on &nbsp; <mat-icon>menu</mat-icon>
+        &nbsp; on the left & select any option on the sidebar</p>
+    </span>
+    <!-- <div *ngFor="let loan of loans">
+            {{loan.loanapplication.loanApplicationArray[1].firstName}}
+        </div> -->
+    <!-- <button (click)="cloudFunction()">Trigger Cloud Functions</button> -->
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

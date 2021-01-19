@@ -1,0 +1,27 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-card">
+  <mat-card fxFlex="45">
+    <app-widget-stats-card label="Clients" [total]="clients" percentage="20" icon="fa fa-user"></app-widget-stats-card>
+  </mat-card>
+  <mat-card fxFlex="45">
+    <app-widget-stats-card label="Loan Applications" [total]="loans" percentage="20" icon="fa fa-money">
+    </app-widget-stats-card>
+  </mat-card>
+
+</div>
+
+<mat-divider></mat-divider>
+
+<br>
+<div>
+  <app-widget-area [data]="bigChart"></app-widget-area>
+</div>
+
+<mat-divider></mat-divider>
+
+<br>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+  <div fxFlex="50">
+    <app-widget-pie [data]="pieChart"></app-widget-pie>
+  </div>
+</div>

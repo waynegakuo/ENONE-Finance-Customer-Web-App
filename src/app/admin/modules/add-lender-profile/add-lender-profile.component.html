@@ -1,0 +1,25 @@
+<h3>Create Lender Profile</h3>
+<div class="content">
+    <form [formGroup]="this.lenders.lenderProfileForm" (ngSubmit)="createProfile()">
+        <!-- {{ this.lenders.lenderProfileForm.value | json }} -->
+        <label for="name">Name: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Name" formControlName="name">
+        <label for="name">Category: <span class="asterix">*</span></label>
+        <select name="category" formControlName="category">
+            <option value="Individual">Individual</option>
+            <option value="Entity">Entity</option>
+        </select>
+        <label for="name">Description: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Description" formControlName="description">
+        <label for="email">Email: <span class="asterix">*</span></label>
+        <input type="email" placeholder="Email" formControlName="email">
+        <label for="mobile">Mobile: <span class="asterix">*</span></label>
+        <input type="number" placeholder="Mobile Number" formControlName="mobile">
+        <label for="physicalAddress">Physical Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Physical Address" formControlName="physicalAddress">
+        <label for="postalAddress">Postal Address: <span class="asterix">*</span></label>
+        <input type="text" placeholder="Postal Address" formControlName="postalAddress">
+
+        <input type="submit" [disabled]="this.lenders.lenderProfileForm.invalid" value="Create Lender Profile">
+    </form>
+</div>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,EAAE,CAAC;EACC,MAAM,EAAE,OAAO;CAClB;;AAED,AAAA,QAAQ,CAAC;EACL,OAAO,EAAE,IAAI;CAMhB;;AAPD,AAGI,QAHI,CAGJ,IAAI,CAAC;EACD,SAAS,EAAE,KAAK;EAChB,WAAW,EAAE,MAAM;CACtB;;AAEL,AAAA,KAAK,CAAA;EACD,KAAK,EAAE,IAAI;EACX,WAAW,EAAE,YAAY;CAC5B",
+    "sources": [
+        "loan-history.component.scss"
+    ],
+    "names": [],
+    "file": "loan-history.component.css"
+}

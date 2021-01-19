@@ -1,0 +1,31 @@
+button:disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+.repayment-choice {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    > span {
+        font-weight: bolder;
+    }
+
+    .mat-radio-group {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .mat-radio-button {
+            margin: 10px;
+        }
+    }
+}
+
+.instructions {
+    display: flex;
+    flex-direction: column;
+
+    img {
+        width: 35%;
+    }
+}

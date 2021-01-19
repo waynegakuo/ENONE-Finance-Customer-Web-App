@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACJ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,aAAa,EAAE,UAAU;EACzB,eAAe,EAAE,aAAa;CAe/B;;AAnBD,AAME,KANG,CAMH,EAAE,CAAC;EACD,UAAU,EAAE,CAAC;EACb,aAAa,EAAE,GAAG;CACnB;;AATH,AAWE,KAXG,CAWH,MAAM,CAAC;EACL,SAAS,EAAE,GAAG;CACf;;AAbH,AAeE,KAfG,CAeH,QAAQ,CAAC;EACP,KAAK,EAAE,KAAK;EACZ,SAAS,EAAE,GAAG;CACf",
+    "sources": [
+        "stats-card.component.scss"
+    ],
+    "names": [],
+    "file": "stats-card.component.css"
+}

@@ -1,0 +1,101 @@
+.text-danger {
+  color: red;
+}
+
+.asterix {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.is-invalid {
+  border: 5px solid yellow;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.mat-datepicker-toggle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.search_bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: end;
+      align-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.lenderprofilenav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px;
+}
+
+.lenderprofilenav h3 {
+  font-weight: bolder;
+}
+
+.lenderprofilenav a {
+  text-decoration: none;
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.profile_record {
+  cursor: pointer;
+}
+
+.table input[type="button"] {
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  margin: 0;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+}
+/*# sourceMappingURL=lenderprofiles.component.css.map */

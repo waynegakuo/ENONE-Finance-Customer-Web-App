@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "loan-status.component.scss"
+    ],
+    "names": [],
+    "file": "loan-status.component.css"
+}

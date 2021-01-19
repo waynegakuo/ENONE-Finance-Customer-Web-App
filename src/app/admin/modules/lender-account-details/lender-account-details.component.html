@@ -1,0 +1,109 @@
+<div class="button_nav">
+    <a class="back_nav" (click)="goBack()">
+        << Lender Accounts Overview </a>
+</div>
+<h3>Lender Account Details</h3>
+
+<div class="content" *ngFor="let account of lenderAccount | async as list">
+    <div class="edit_section">
+        <a class="edit_nav" (click)="editLenderAccount(account)">
+            <mat-icon>edit</mat-icon>
+            Edit Account Details
+        </a>
+    </div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Loan Specifics</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <th scope="row">Account Number</th>
+                <td></td>
+                <td></td>
+                <td>{{account.accountNumber}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Amount</th>
+                <td></td>
+                <td></td>
+                <td>{{account.amount}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Description</th>
+                <td></td>
+                <td></td>
+                <td>{{account.description}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Monthly Interest</th>
+                <td></td>
+                <td></td>
+                <td>{{account.monthlyInterest}}%</td>
+            </tr>
+            <tr>
+                <th scope="row">Repayment Amount</th>
+                <td></td>
+                <td></td>
+                <td>{{account.repaymentAmount}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Repayment Schedule</th>
+                <td></td>
+                <td></td>
+                <td>{{account.repaymentSchedule}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Total Payable</th>
+                <td></td>
+                <td></td>
+                <td>{{account.totalPayable}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Start Date</th>
+                <td></td>
+                <td></td>
+                <td>{{account.startDate | date: 'MMMM d, y'}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Contract End Date</th>
+                <td></td>
+                <td></td>
+                <td>{{account.contractEndDate | date: 'MMMM d, y'}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Actual End Date</th>
+                <td></td>
+                <td></td>
+                <td>{{account.actualEndDate | date: 'MMMM d, y'}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <mat-divider></mat-divider>
+
+    <!-- Shows when the edit button is clicked -->
+    <div class="edit_content" *ngIf="editAccount">
+        <h3>Edit Lender Account Details</h3>
+
+        <form [formGroup]="this.lenders.lenderAccountForm" (ngSubmit)="updateLenderAccount(account)">
+            <!-- {{ this.lenders.lenderAccountForm.value | json }} -->
+            <label for="name">Loan Actual End Date <span class="asterix">*</span></label>
+
+            <div class="date-picker">
+                <input [matDatepicker]="endDate" formControlName="actualEndDate" type="text" readonly>
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+            </div>
+
+            <input type="submit" [disabled]="this.lenders.lenderAccountForm.invalid" value="Update Lender Account">
+        </form>
+    </div>
+    <!-- End of edit section -->
+
+</div>

@@ -1,0 +1,98 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ENONE-Finance-Customer-Web-App-primary: mat-palette($mat-indigo);
+$ENONE-Finance-Customer-Web-App-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$ENONE-Finance-Customer-Web-App-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$ENONE-Finance-Customer-Web-App-theme: mat-light-theme((
+  color: (
+    primary: $ENONE-Finance-Customer-Web-App-primary,
+    accent: $ENONE-Finance-Customer-Web-App-accent,
+    warn: $ENONE-Finance-Customer-Web-App-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ENONE-Finance-Customer-Web-App-theme);
+
+@import "./color";
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+
+* {
+    font-family: 'Poppins';
+}
+html,
+body {
+    height: 100%;
+    // background-color: #efefef;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-datepicker-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+    border-radius: 5px;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: $primary;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+    background-color: $primary;
+}
+
+.mat-horizontal-content-container {
+    display: flex;
+    flex-direction: column;
+    // background-color: #efefef;
+    // color: white;
+    // background-color: $or;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked,
+.mat-primary .mat-pseudo-checkbox-indeterminate {
+    background-color: $primary;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: $primary;
+}
+
+.mat-pseudo-checkbox::after {
+    color: white;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

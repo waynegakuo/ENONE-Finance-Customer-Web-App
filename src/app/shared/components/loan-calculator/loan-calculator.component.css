@@ -1,0 +1,161 @@
+.content {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.content .calculator-section {
+  width: 50%;
+  height: 50%;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 0 6px 2px #e4e4e4;
+          box-shadow: 0 0 6px 2px #e4e4e4;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.content .calculator-section .head {
+  font-size: 0.8em;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  background-color: #017ac2;
+  color: white;
+  height: 71px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 4px 4px 0px 0px;
+  margin-bottom: 10px;
+}
+
+.content .calculator-section form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  padding: 1.5em;
+}
+
+.content .calculator-section form > input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.content .calculator-section form button {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  width: 206px;
+  height: 36px;
+  border: none;
+  font-weight: bolder;
+  border-radius: 4px;
+  color: white;
+  background-color: #017ac2;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.content .calculator-section form button:disabled {
+  background: #ccc;
+}
+
+.content .results {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.content .results .card-1 {
+  color: white;
+  background-color: #47a386;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.content .results .card-2 {
+  color: white;
+  background-color: #7273c5;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.content .results .card-3 {
+  color: white;
+  background-color: #5445db;
+  padding: 20px;
+  margin: 10px;
+  width: 300px;
+  height: 150px;
+  border-radius: 5px;
+}
+
+.content .results .monthlyPayment,
+.content .results .totalInterest,
+.content .results .totalPayment {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.content .results .indicators {
+  font-size: 1.3em;
+}
+/*# sourceMappingURL=loan-calculator.component.css.map */

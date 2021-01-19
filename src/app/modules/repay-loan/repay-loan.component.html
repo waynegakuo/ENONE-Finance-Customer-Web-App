@@ -1,0 +1,57 @@
+<div class="content">
+  <span>Repay Loan</span>
+  <!-- <div *ngFor="let loan of loans">
+            {{loan.loanapplication.loanApplicationArray[1].firstName}}
+        </div> -->
+</div>
+<div *ngIf="availableLoans; else elseBlock">
+  <div class="table_section" *ngFor="let loan of loans">
+    <div class="table table-hover">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Loan Type</th>
+            <th scope="col">Loan Amount</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{loan.loanApplication.loanApplicationArray[2].loanFacilityType}}</th>
+            <td>{{loan.loanApplication.loanApplicationArray[2].borrowAmount}}</td>
+            <td><input type="button" value="Repay" class="btn btn-success" (click)="loanView($event, loan)">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Form to display when one clicks on a loan application to view its details -->
+    <div *ngIf="loanViewSection && loanItem.addedAt == loan.addedAt">
+      <app-loan-repayment [loan]="loan"></app-loan-repayment>
+
+      <!-- <form class="form-inline" [formGroup]="loanRepayForm" (ngSubmit)="repayLoan()">
+                <label class="sr-only" for="inlineFormInputName2">Number</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"
+                    placeholder="Phone Number" formControlName="phoneNumber">
+
+                <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Kshs.</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Amount"
+                        formControlName="amount">
+                </div>
+
+                <button type="submit" class="btn btn-success mb-2">Lipa Na M-PESA</button>
+            </form> -->
+    </div>
+
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div class="alert alert-info user_alert" role="alert">
+    You have no loans applied!
+  </div>
+</ng-template>

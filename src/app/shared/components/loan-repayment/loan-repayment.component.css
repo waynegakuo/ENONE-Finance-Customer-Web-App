@@ -1,0 +1,50 @@
+button:disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.repayment-choice {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.repayment-choice > span {
+  font-weight: bolder;
+}
+
+.repayment-choice .mat-radio-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.repayment-choice .mat-radio-group .mat-radio-button {
+  margin: 10px;
+}
+
+.instructions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.instructions img {
+  width: 35%;
+}
+/*# sourceMappingURL=loan-repayment.component.css.map */

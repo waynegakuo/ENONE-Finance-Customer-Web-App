@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACR,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,aAAa,EAAE,QAAQ;EACvB,eAAe,EAAE,QAAQ;CAC5B",
+    "sources": [
+        "repaid-loans.component.scss"
+    ],
+    "names": [],
+    "file": "repaid-loans.component.css"
+}

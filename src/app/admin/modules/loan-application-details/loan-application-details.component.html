@@ -1,0 +1,358 @@
+<a class="back_nav" (click)="goBack()"> << Loans Applied Overview </a>
+
+<div class="content" *ngFor="let loan of loansApplied | async as list">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Loan Specifics</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="loan.loanApplication.loanApplicationArray[0].loanType == 'Personal Loan' 
+                else businessLoan">
+                <tr>
+                    <th scope="row">Loan Type</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].loanType}}</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Company</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.company}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Company Building</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.building}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">County</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.county}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Postal Address</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.postalAddress}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Postal Code</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.postalCode}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Street Name</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.street}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Earnings</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.earnings}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Employment Nature</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].personalDetails.employmentNature}}</td>
+                </tr>
+                
+            </ng-container>
+
+            <ng-template #businessLoan>
+                <tr>
+                    <th scope="row">Business Name</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.businessName}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Type of Ownership</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.ownershipType}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Business Industry</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.industry}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Business Registration Number</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.regNumber}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date of Registration</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.regDate.toDate() | date: 'MMMM d, y'}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">KRA PIN Number</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.kraPin}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">VAT Number</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.vatNumber}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Number of Employees</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.employeesNum}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Number of Years in Business</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.yearsInBusiness}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">County</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.address.county}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Postal Address</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.address.postalAddress}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Postal Code</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.address.postalCode}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Street Name</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.address.street}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Capital Paid</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.capitalPaid}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Contact Email</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.contactEmail}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Contact Name</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.contactName}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Contact Mobile</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.contactMobile}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Countries of Operation</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.countriesOperating}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last 12 months financial performance: Date from</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.dateFrom.toDate() | date: 'MMMM d, y'}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last 12 months financial performance: Date to</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.dateTo.toDate() | date: 'MMMM d, y'}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last 12 months financial performance: Cost of Sales</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.costOfSales}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last 12 months financial performance: Sales</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.sales}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last 12 months financial performance: Operating Expenses</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.operatingExp}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last 12 months financial performance: Gross Profit</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.grossProfit}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last 12 months financial performance: Net Profit Before Tax</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.netProfitBeforeTax}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">As of last end month: Values of Stock Held</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.stockValue}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">As of last end month: Trade Debtors O/S</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.tradeDebtor}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">As of last end month: Trade Creditor O/S</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.tradeCreditor}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">As of last end month: Other Debts</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.otherDebts}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Annual Turnover</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.turnoverRange}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Projected Turnover</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.projectedTurnover}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">As of last end month: Other Debts</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{loan.loanApplication.loanApplicationArray[0].businessDetails.otherDebts}}</td>
+                </tr>
+            </ng-template>
+
+            <tr>
+                <th scope="row">Title</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].title}}</td>
+            </tr>
+            <tr>
+                <th scope="row">First Name</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].firstName}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Middle Name</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].middleName}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Last Name</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].lastName}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Gender</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].gender}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Date of Birth</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].dob.toDate() | date: 'MMMM d, y'}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Marital Status</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].maritalStatus}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nationality</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].nationality}}</td>
+            </tr>
+            <tr>
+                <th scope="row">ID Number</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].id}}</td>
+            </tr>
+            <tr>
+                <th scope="row">KRA PIN Number</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].kraPin}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Social Media</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[1].socialMedia}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Borrow Amount</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[2].borrowAmount}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Loan Facilities with other Institutions?</th>
+                <td></td>
+                <td></td>
+                <td>{{loan.loanApplication.loanApplicationArray[2].otherInstitutions}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <h5>Uploaded Documents</h5>
+    <div class="uploads">
+        <div *ngFor="let upload of fileUploads | async as list">
+            <a class="download_url" [href]="upload.downloadURL" target="_blank" rel="noopener noreferrer">Download
+                Document</a>
+        </div>
+    </div>
+</div>

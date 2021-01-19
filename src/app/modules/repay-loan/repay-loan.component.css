@@ -1,0 +1,18 @@
+tr {
+  cursor: pointer;
+}
+
+.content {
+  padding: 10px;
+}
+
+.content span {
+  font-size: 1.3em;
+  font-weight: bolder;
+}
+
+table {
+  width: 100%;
+  font-family: "Montserrat";
+}
+/*# sourceMappingURL=repay-loan.component.css.map */

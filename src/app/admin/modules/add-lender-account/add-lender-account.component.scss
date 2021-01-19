@@ -1,0 +1,80 @@
+@import "../../../../color";
+@import "../../../../shadow";
+
+.text-danger {
+    color: red;
+}
+.asterix {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.is-invalid {
+    border: 5px solid yellow;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background: #ccc;
+}
+
+h3 {
+    font-weight: bolder;
+}
+.content {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    border-top: $border-top;
+
+    input[type="submit"],
+    input[type="button"] {
+        background-color: $primary;
+        color: white;
+        border: 0;
+        border-radius: 5px;
+        padding: 10px 25px;
+        font-weight: bold;
+        margin: 10px 0;
+        cursor: pointer;
+
+        &:disabled {
+            cursor: not-allowed;
+            background: #ccc;
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="email"],
+        select,
+        option,
+        textarea {
+            padding: 12px 20px;
+            margin: 10px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .date-picker {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .danger {
+            background-color: red;
+        }
+    }
+}

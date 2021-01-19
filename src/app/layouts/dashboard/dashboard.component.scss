@@ -1,0 +1,58 @@
+@import "../../../color";
+@import "../../../shadow";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+span {
+  // width: 50%;
+  display: flex;
+  align-content: center;
+  // justify-content: ;
+}
+
+p {
+    font-weight: bolder;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+mat-drawer {
+    width: 250px;
+}
+
+mat-drawer-container {
+    height: 100%;
+}
+
+mat-drawer-content {
+    padding: 20px;
+}
+
+@media screen and (max-width: 1200px){
+  span {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 768px){
+  span {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 480px){
+  span {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}

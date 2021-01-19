@@ -1,0 +1,196 @@
+.text-danger {
+  color: red;
+}
+
+.asterix {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.mat-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-right: 5px;
+}
+
+h3 {
+  font-weight: bolder;
+  margin-top: 20px;
+}
+
+.back_nav {
+  text-decoration: none;
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.edit_nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  text-decoration: none;
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 20px 0;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.content .edit_section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: end;
+      align-content: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.content .edit_content {
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  border-top: #D8D8D8 1px solid;
+}
+
+.content .edit_content input[type="submit"],
+.content .edit_content input[type="button"] {
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.content .edit_content input[type="submit"]:disabled,
+.content .edit_content input[type="button"]:disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.content .edit_content form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content .edit_content form input[type="text"],
+.content .edit_content form input[type="number"],
+.content .edit_content form input[type="date"],
+.content .edit_content form input[type="email"],
+.content .edit_content form select,
+.content .edit_content form option,
+.content .edit_content form textarea {
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.content .edit_content form .date-picker {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.content .edit_content form .danger {
+  background-color: red;
+}
+
+.button_nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px;
+}
+/*# sourceMappingURL=lender-account-details.component.css.map */

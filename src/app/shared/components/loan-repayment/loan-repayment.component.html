@@ -1,0 +1,64 @@
+<div class="loan-details">
+  <h5>Loan Date: <b>{{loan.dateApplied}}</b> </h5>
+  <h5>Loan Type: <b>{{loan.loanApplication.loanApplicationArray[2].loanFacilityType}}</b></h5>
+  <h5>Loan Amount: <b>{{loan.loanApplication.loanApplicationArray[2].borrowAmount}}</b></h5>
+  <!-- <h5>Repayment Amount:</h5> -->
+  <!-- <h5>Repayment Due Date:</h5> -->
+  <!-- <h5>Loan Balance:</h5> -->
+
+  <div class="repayment-choice">
+    <span>How much would you like to repay?</span>
+    <form [formGroup]="repayChoice">
+      <mat-radio-group formControlName="amountPay">
+        <mat-radio-button value="Full">Full Amount</mat-radio-button>
+        <mat-radio-button value="Partial">Partial</mat-radio-button>
+      </mat-radio-group>
+
+      <!-- Shown if the 'Partial' radio button is selected  -->
+      <div class="partial-inputs" *ngIf="isPartial">
+        <span>Enter Partial Amount:</span>
+        <div class="form-inline">
+          <input type="number" class="form-control mb-2 mr-sm-2" formControlName="partialAmount">
+          <button type="submit" class="btn btn-success mb-2" (click)="showInstructions()">Instructions</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Shown if the "Full Amount" radio button is selected -->
+  <div *ngIf="isFull">
+    <div class="instructions">
+      <img src="../../../../assets/images/mpesa-lipa.png" alt="Lipa na M-Pesa Logo">
+      <span>Go to M-Pesa Menu, Select <b>"Lipa Na M-Pesa"</b></span>
+      <span>Select <b>"Paybill"</b></span>
+      <span>Enter Business account number as: <b>880100</b></span>
+      <span>Enter Account number as: <b>3085930143</b></span>
+      <span>Enter Amount as: <b>{{loan.loanApplication.loanApplicationArray[2].borrowAmount}}</b></span>
+      <span>Enter your <b>M-PESA PIN </b> to complete transaction.</span>
+    </div>
+
+    <form [formGroup]="this.repayLoan.repaymentForm" (ngSubmit)="addLoanRepayment()">
+      <div class="form-inline">
+        <input type="text" class="form-control mb-2 mr-sm-2" formControlName="name" placeholder="Full Name">
+        <input type="text" placeholder="MPESA Confirmation Code" class="form-control mb-2 mr-sm-2"
+          formControlName="confirmationCode">
+        <button type="submit" class="btn btn-success mb-2" [disabled]="this.repayLoan.repaymentForm.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Shown if "Instuctions" button is clicked and triggers showInstructions() -->
+  <div *ngIf="showInstructionPartial">
+    <div class="instructions">
+      <img src="../../../../assets/images/mpesa-lipa.png" alt="Lipa na M-Pesa Logo">
+      <span>Go to M-Pesa Menu, Select <b>"Lipa Na M-Pesa"</b></span>
+      <span>Select <b>"Paybill"</b></span>
+      <span>Enter Business account number as: <b>880100</b></span>
+      <span>Enter Account number as: <b>3085930143</b></span>
+      <span>Enter Amount as: <b>{{partialAmountValue}}</b></span>
+      <span>Enter your <b>M-PESA PIN </b> to complete transaction.</span>
+    </div>
+  </div>
+
+
+</div>

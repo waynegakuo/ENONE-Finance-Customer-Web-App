@@ -1,0 +1,73 @@
+ng-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.back_nav {
+  text-decoration: none;
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.download_url {
+  text-decoration: none;
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 15px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 20px 0;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.content h5 {
+  font-weight: bolder;
+}
+
+.content .uploads {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 20px 0;
+}
+/*# sourceMappingURL=loan-application-details.component.css.map */

@@ -1,0 +1,74 @@
+@import "../../../color";
+@import "../../../shadow";
+.header {
+    font-weight: bold;
+}
+
+.content {
+    h5 {
+        font-weight: bold;
+    }
+    .text-danger {
+        color: red;
+    }
+    .asterix {
+        color: red;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .content-wrapper-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .content-wrapper,
+    .content-wrapper-2 {
+        .details {
+            padding: 10px;
+
+            .subtype_details {
+                margin: 5px 0 5px 0;
+            }
+            .loan-subtype {
+                list-style: none;
+                font-weight: bold;
+            }
+            .loan-subtype.second {
+                margin-top: 5px;
+            }
+            .sub {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .table-head{
+        font-weight: bold;
+    }
+}
+
+@media screen and (max-width: 1200px){
+
+}
+@media screen and (max-width: 768px){
+
+}
+@media screen and (max-width: 480px){
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .content-wrapper{
+      flex-direction: column;
+    }
+  }
+}

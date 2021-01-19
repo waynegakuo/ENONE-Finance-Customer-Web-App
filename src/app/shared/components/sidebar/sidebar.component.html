@@ -1,0 +1,40 @@
+<mat-nav-list>
+    <div class="profile-card">
+        <div class="header">
+            <h2>{{displayName}}</h2>
+        </div>
+        <img src="../../../../assets/images/user.png" alt="User">
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Menu</h2>
+    <a mat-list-item [routerLink]="['loan-products']" routerLinkActive="list-item-active">
+        <mat-icon>details</mat-icon>
+        Loan Products
+    </a>
+    <a mat-list-item [routerLink]="['apply-loan']" routerLinkActive="list-item-active">
+        <mat-icon>note_add</mat-icon>
+        Apply for a Loan
+    </a>
+    <a mat-list-item [routerLink]="['loan-history']" routerLinkActive="list-item-active">
+        <mat-icon>history</mat-icon>
+        Loan History
+    </a>
+    <!-- <a mat-list-item>
+        <mat-icon>get_app</mat-icon>
+        Loan Statement
+    </a> -->
+    <a mat-list-item [routerLink]="['repay']" routerLinkActive="list-item-active">
+        <mat-icon> attach_money</mat-icon>
+        Repay Loan
+    </a>
+
+    <mat-divider></mat-divider>
+
+    <h2 matSubheader>Tools</h2>
+    <a mat-list-item [routerLink]="['tools']" routerLinkActive="list-item-active">
+        <mat-icon>build</mat-icon>
+        Loan Tools
+    </a>
+</mat-nav-list>

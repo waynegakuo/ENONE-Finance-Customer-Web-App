@@ -1,0 +1,19 @@
+<mat-drawer-container>
+    <mat-drawer mode="side" opened #sidebar>
+        <app-admin-sidebar [displayName]="displayName" [email]="email"></app-admin-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <button mat-icon-button (click)="sidebar.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+        <div class="admin-form">
+            <form class="make-admin" [formGroup]="createAdminForm" (ngSubmit)="makeAdmin()">
+                <input type="email" placeholder="Email" formControlName="email">
+                <input type="Submit" value="Make Admin" [disabled]="createAdminForm.invalid">
+            </form>
+            <small *ngIf="errorMsg" class="error-msg">{{errorMsg}}</small>
+            <small *ngIf="successMsg" class="success-msg">{{successMsg}}</small>
+        </div>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

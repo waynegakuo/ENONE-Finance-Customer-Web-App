@@ -1,0 +1,138 @@
+.nav-bar {
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 10px;
+  overflow: hidden;
+}
+
+.nav-bar img {
+  color: #017ac2;
+  margin: 0;
+  width: 5%;
+  cursor: pointer;
+}
+
+.nav-bar .burger {
+  display: none;
+}
+
+.nav-bar .burger:focus {
+  outline: none;
+}
+
+.nav-bar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar ul li {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.nav-bar ul li a {
+  text-decoration: none;
+  color: #017ac2;
+  font-weight: bold;
+  position: relative;
+}
+
+.nav-bar ul li a.bold {
+  padding: 10px 27px !important;
+  font-weight: bold;
+  border: 1px solid #017ac2;
+  border-radius: 5px;
+}
+
+.nav-bar ul li a.button {
+  padding: 10px 27px !important;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: white;
+  background: #017ac2;
+  border-radius: 5px;
+}
+
+.nav-bar ul li a::after {
+  content: "";
+  background-color: #017ac2;
+  position: absolute;
+  left: 0;
+  bottom: -18px;
+  height: 2px;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+}
+
+.nav-bar ul li .nav_link:hover::after {
+  -webkit-transform: translateY(-15px);
+          transform: translateY(-15px);
+  opacity: 1;
+}
+
+.nav-bar ul .active ~ span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1.5px solid #017ac2;
+  z-index: 1;
+}
+
+/* responsiveness */
+@media (max-width: 480px) {
+  .nav-bar img {
+    width: 20%;
+  }
+  .nav-bar .burger {
+    display: block;
+    margin: 0 15px 10px 0;
+  }
+  nav ul {
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    position: fixed;
+    top: 80px;
+    left: 10%;
+    width: 80%;
+    text-align: center;
+    -webkit-transform: translateX(120%);
+            transform: translateX(120%);
+    -webkit-transition: -webkit-transform 0.4s ease;
+    transition: -webkit-transform 0.4s ease;
+    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, -webkit-transform 0.4s ease;
+  }
+  nav ul.show {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  nav ul li {
+    margin: 15px;
+  }
+}
+/*# sourceMappingURL=navbar.component.css.map */

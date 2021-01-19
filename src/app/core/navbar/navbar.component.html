@@ -1,0 +1,40 @@
+<nav class="nav-bar">
+
+  <img [routerLink]="['']" src="../../../assets/images/edge_three_sixty_logo.jpg" alt="">
+
+  <mat-icon [matMenuTriggerFor]="menu" class="burger">menu</mat-icon>
+
+  <ul>
+    <li><a [routerLink]="['']" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"
+        class="nav_link">Home</a><span class="isactive"></span></li>
+    <li *appShowifloggedin="true"><a [routerLink]="['admin']" [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active" class="nav_link">Admin</a><span class="isactive"></span></li>
+    <li *appShowifloggedin="false"><a class="bold" [routerLink]="['login']"
+        routerLinkActive="router-link-active">Login</a></li>
+    <li *appShowifloggedin="false"><a class="button outline bold" [routerLink]="['sign-up']">Sign Up</a>
+    </li>
+    <li *appShowifloggedin="true"><a [routerLink]="['dashboard']" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }" class="nav_link">My Dashboard</a><span class="isactive"></span>
+    </li>
+    <li *appShowifloggedin="true"><a class="bold" (click)="signOutUser()">Log Out</a></li>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['']" [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active">Home</button>
+      <button *appShowifloggedin="true" mat-menu-item [routerLink]="['admin']"
+        [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Admin</button>
+      <button *appShowifloggedin="false" mat-menu-item [routerLink]="['login']"
+        [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Login</button>
+      <button *appShowifloggedin="false" mat-menu-item [routerLink]="['sign-up']"
+        [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Sign Up</button>
+      <button *appShowifloggedin="true" mat-menu-item [routerLink]="['dashboard']"
+        [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">My Dashboard</button>
+      <button *appShowifloggedin="true" mat-menu-item (click)="signOutUser()">Log Out</button>
+    </mat-menu>
+
+  </ul>
+
+
+
+
+</nav>

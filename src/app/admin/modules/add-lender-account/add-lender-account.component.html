@@ -1,0 +1,46 @@
+<h3>Create Lender Account</h3>
+<div class="content">
+    <form [formGroup]="this.lenders.lenderAccountForm" (ngSubmit)="createAccount()">
+        <!-- {{ this.lenders.lenderAccountForm.value | json }} -->
+        <label for="name">Loan Description <span class="asterix">*</span></label>
+        <textarea name="queries" cols="20" rows="5" placeholder="Description" formControlName="description"></textarea>
+        <label for="name">Loan Amount (Kshs.)<span class="asterix">*</span></label>
+        <input type="number" placeholder="Ksh." formControlName="amount">
+        <label for="name">Loan Start Date <span class="asterix">*</span></label>
+        <div class="date-picker">
+            <input [matDatepicker]="picker" formControlName="startDate" type="text" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <label for="name">Loan Contract End Date <span class="asterix">*</span></label>
+        <div class="date-picker">
+            <input [matDatepicker]="pickerContract" formControlName="contractEndDate" type="text" readonly>
+            <mat-datepicker-toggle matSuffix [for]="pickerContract"></mat-datepicker-toggle>
+            <mat-datepicker #pickerContract></mat-datepicker>
+        </div>
+        
+        <label for="monthlyInterest">Interest Rate Per Month <span class="asterix">*</span></label>
+        <input type="number" placeholder="%" formControlName="monthlyInterest">
+        <input type="button"
+            [disabled]="this.lenders.amount.invalid || this.lenders.startDate.invalid || this.lenders.contractEndDate.invalid || this.lenders.monthlyInterest.invalid"
+            value="Calculate Total Loan Payable" (click)="calculateLoanPay()">
+
+        <label for="mobile">Total Loan Payable (Kshs.) <span class="asterix">*</span></label>
+        <input type="number" placeholder="Kshs." formControlName="totalPayable" [value]="loanPayable" readonly>
+
+        <!-- <label for="name">Loan Actual End Date <span class="asterix">*</span></label>
+        <input formControlName="actualEndDate" type="text" [value]="loanActualEndDate | date: 'MMMM d, y'" readonly> -->
+
+        <label for="repaymentSchedule">Repayment Schedule <span class="asterix">*</span></label>
+        <select name="repaymentSchedule" formControlName="repaymentSchedule">
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Bi-annually">Bi-annually</option>
+            <option value="Annually">Annually</option>
+        </select>
+        <label for="repaymentAmount">Repayment Amount (Kshs.)<span class="asterix">*</span></label>
+        <input type="number" placeholder="Kshs." formControlName="repaymentAmount" [value]="repaymentAmount" readonly>
+
+        <input type="submit" [disabled]="this.lenders.lenderAccountForm.invalid" value="Create Lender Account">
+    </form>
+</div>

@@ -1,0 +1,87 @@
+<div class="content">
+  <span>Here is your loan application history</span>
+  <!-- <div *ngFor="let loan of loans">
+            {{loan.loanapplication.loanApplicationArray[1].firstName}}
+        </div> -->
+</div>
+<div *ngIf="availableLoans; else elseBlock">
+  <div class="table_section" *ngFor="let loan of loans">
+    <div class="table table-hover">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Loan Type</th>
+            <th scope="col">Loan Amount</th>
+            <th scope="col">Loan Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="loanView($event, loan)">
+            <th scope="row">{{loan.loanApplication.loanApplicationArray[2].loanFacilityType}}</th>
+            <td>{{loan.loanApplication.loanApplicationArray[2].borrowAmount}}</td>
+            <td>{{loan.loanStatus}}</td>
+            <!-- <td><input type="button" value="View" class="btn btn-primary" (click)="loanView($event, loan)"></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Form to display when one clicks on a loan application to view its details -->
+    <div *ngIf="loanViewSection && loanItem.addedAt == loan.addedAt" #TABLE #table>
+      <h4>Here are your Loan Details</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Loan Specifics</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" colspan="3">Loan Type</th>
+            <td><i>{{loan.loanApplication.loanApplicationArray[2].loanFacilityType}}</i></td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">Loan Amount</th>
+            <td><i>{{loan.loanApplication.loanApplicationArray[2].borrowAmount}}</i></td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">Date Received</th>
+            <td><i>{{loan.dateApplied}}</i></td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">Interest Rate</th>
+            <td><i>5% p.m</i></td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">Loan Duration</th>
+            <td><i>{{loan.loanApplication.loanApplicationArray[2].repaymentPeriod}}</i></td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="3">Loan Status</th>
+            <td><i>{{loan.loanStatus}}</i></td>
+          </tr>
+
+          <tr>
+            <th scope="row" colspan="3">Date Completed</th>
+            <td><i>{{loan?.dateCompleted || 'N/A'}}</i></td>
+          </tr>
+
+          <tr>
+            <th scope="row" colspan="3">Total Amount Paid</th>
+            <td><i>{{loan?.totalAmountPaid || 0}}</i></td>
+          </tr>
+        </tbody>
+      </table>
+      <input style="float: right;" type="button" value="Download Statement" class="btn btn-success"
+        (click)="exportToExcel()">
+    </div>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div class="alert alert-info user_alert" role="alert">
+    You have no loans applied!
+  </div>
+</ng-template>

@@ -1,0 +1,42 @@
+[
+    {
+        "type": "Personal Loan",
+        "facility": "Personal Loan"
+    },
+    {
+        "type": "Business Loan",
+        "facility": "Trade Finance Short Term Loan"
+    },
+    {
+        "type": "Business Loan",
+        "facility": "Short Term Loan"
+    },
+    {
+        "type": "Personal Loan",
+        "facility": "Temporary Short Term Loan"
+    },
+    {
+        "type": "Business Loan",
+        "facility": "Long Term Loan"
+    },
+    {
+        "type": "Business Loan",
+        "facility": "Assest Finance"
+    },
+    {
+        "type": "Business Loan",
+        "facility": "Mortgage Loan"
+    },
+    {
+        "type": "Business Loan",
+        "facility": "Bank Guarantee"
+    },
+    {
+        "type": "Personal Loan",
+        "facility": "Insurance Premium Finance"
+    },
+    {
+        "type": "Business Loan",
+        "facility": "Invoice Discounting"
+    }
+]

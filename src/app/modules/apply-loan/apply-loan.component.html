@@ -1,0 +1,1857 @@
+<div class="content">
+  <div *ngIf="this.applyLoan.state === 'synced'" class="alert alert-success">
+    Your Application is Synced with the Database
+  </div>
+
+  <div *ngIf="this.applyLoan.state === 'modified'" class="alert alert-warning">
+    Your Application has Unsaved Changes
+  </div>
+
+  <div *ngIf="this.applyLoan.state === 'loading'" class="alert alert-info">
+    This Loan Application has an Auto-Save Feature
+  </div>
+
+  <div *ngIf="this.applyLoan.state === 'error'" class="alert alert-danger">
+    Your Application Tried & Failed to save to the Database
+  </div>
+
+  <div class="stepper">
+    <form [formGroup]="this.applyLoan.loanApplicationForm" appAutosave #loanId="autosaveDirective" path="loans"
+      (stateChange)="this.applyLoan.changeHandler($event)">
+      <!-- {{ this.applyLoan.loanApplicationForm.value | json }} -->
+      <!-- {{loanApplicationForm.firstName | json}} -->
+
+      <!-- Fetching the created loan id from the autosave directive -->
+      <!-- <span>{{loanId.getLoanId}}</span> -->
+
+      <mat-horizontal-stepper [linear]="isLinear" #stepper formArrayName="loanApplicationArray">
+        <!-- INCOME DETAILS STEP -->
+        <mat-step formGroupName="0" [stepControl]="this.applyLoan.loanApplicationArray?.get([0])">
+          <ng-template matStepLabel>Income Details</ng-template>
+
+          <div class="loan-type">
+
+            <label>Choose the type of loan you wish to apply for: </label><span class="asterix">*</span>
+            <mat-radio-group formControlName="loanType" [ngClass]="{'is-invalid': this.applyLoan.loanType.invalid}">
+              <mat-radio-button value="Business Loan">I own a business, I want a business loan
+              </mat-radio-button>
+              <mat-radio-button value="Personal Loan">I am employed, I want a personal loan
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <div *ngIf="this.applyLoan.loanType.invalid">
+              <small *ngIf="this.applyLoan.loanType.errors?.required" class="text-danger">*Select the Loan
+                Type</small>
+            </div>
+
+
+            <ng-container *ngIf="this.applyLoan.isBusiness; else personal">
+              <div formGroupName="businessDetails">
+                <p>To be eligible for any business loan, your business must meet the following criteria:
+                </p>
+                <ol>
+                  <li>Be a Limited Liability Company, Partnerships or Sole Proprietorship</li>
+                  <li>Businesses must be Kenyan with up to date Kenyan business registration
+                    documentation
+                  </li>
+                  <li>Directors or Applicants must be 18-70 years old</li>
+                </ol>
+
+                <p><b>Tell us more about your business or company that you work for? </b></p>
+                <label>Business Name<span class="asterix">*</span></label>
+                <input type="text" required formControlName="businessName"
+                  [ngClass]="{'is-invalid': this.applyLoan.businessName.invalid}">
+                <div *ngIf="this.applyLoan.businessName.invalid">
+                  <small *ngIf="this.applyLoan.businessName.errors?.required" class="text-danger">*Business Name is
+                    required</small>
+                </div>
+
+                <label>Type of Ownership<span class="asterix">*</span></label>
+                <select formControlName="ownershipType"
+                  [ngClass]="{'is-invalid': this.applyLoan.ownershipType.invalid}">
+                  <option *ngFor="let item of ownership" [value]="item">{{item}}</option>
+                </select>
+                <div *ngIf="this.applyLoan.ownershipType.invalid">
+                  <small *ngIf="this.applyLoan.ownershipType.errors?.required" class="text-danger">*Type of ownership is
+                    required</small>
+                </div>
+
+
+                <label>Business Registration Number<span class="asterix">*</span></label>
+                <input type="number" formControlName="regNumber"
+                  [ngClass]="{'is-invalid': this.applyLoan.regNumber.invalid}">
+                <div *ngIf="this.applyLoan.regNumber.invalid">
+                  <small *ngIf="this.applyLoan.regNumber.errors?.required" class="text-danger">*Business registration
+                    number is required</small>
+                </div>
+
+                <label>Date of Registration<span class="asterix">*</span></label>
+                <div class="date-picker">
+                  <input [matDatepicker]="picker" formControlName="regDate" type="text" readonly
+                    [ngClass]="{'is-invalid': this.applyLoan.regDate.invalid}">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
+                <div *ngIf="this.applyLoan.regDate.invalid">
+                  <small *ngIf="this.applyLoan.regDate.errors?.required" class="text-danger">*Registration date is
+                    required</small>
+                </div>
+
+                <label>Business Industry<span class="asterix">*</span></label>
+                <select formControlName="industry" [ngClass]="{'is-invalid': this.applyLoan.industry.invalid}">
+                  <option *ngFor="let item of industry" [value]="item">{{item}}</option>
+                </select>
+                <div *ngIf="this.applyLoan.industry.invalid">
+                  <small *ngIf="this.applyLoan.industry.errors?.required" class="text-danger">*Business industry is
+                    required</small>
+                </div>
+
+                <label>KRA Pin Number<span class="asterix">*</span></label>
+                <input type="text" formControlName="kraPin" [ngClass]="{'is-invalid': this.applyLoan.kraPin.invalid}">
+                <div *ngIf="this.applyLoan.kraPin.invalid">
+                  <small *ngIf="this.applyLoan.kraPin.errors?.required" class="text-danger">*KRA Pin
+                    is required</small>
+                </div>
+
+                <label>VAT Number<span class="asterix">*</span></label>
+                <input type="number" formControlName="vatNumber"
+                  [ngClass]="{'is-invalid': this.applyLoan.vatNumber.invalid}">
+                <div *ngIf="this.applyLoan.vatNumber.invalid">
+                  <small *ngIf="this.applyLoan.vatNumber.errors?.required" class="text-danger">*VAT
+                    number is required</small>
+                </div>
+
+                <label>Number of Employees<span class="asterix">*</span></label>
+                <input type="number" formControlName="employeesNum"
+                  [ngClass]="{'is-invalid': this.applyLoan.employeesNum.invalid}">
+                <div *ngIf="this.applyLoan.employeesNum.invalid">
+                  <small *ngIf="this.applyLoan.employeesNum.errors?.required" class="text-danger">*Number of employees
+                    is required</small>
+                </div>
+
+                <label>Number of Years in Business<span class="asterix">*</span></label>
+                <input type="number" formControlName="yearsInBusiness"
+                  [ngClass]="{'is-invalid': this.applyLoan.yearsInBusiness.invalid}">
+                <div *ngIf="this.applyLoan.yearsInBusiness.invalid">
+                  <small *ngIf="this.applyLoan.yearsInBusiness.errors?.required" class="text-danger">*Number of years in
+                    business is required</small>
+                </div>
+
+                <label>Annual Turnover Range (KES)<span class="asterix">*</span></label>
+                <mat-radio-group class="turnover" formControlName="turnOverRange">
+                  <div class="turnover-1">
+                    <mat-radio-button value="0-1M">0-1M</mat-radio-button>
+                    <mat-radio-button value="5M-10M">5M-10M</mat-radio-button>
+                    <mat-radio-button value="20M-50M">20M-50M</mat-radio-button>
+                    <mat-radio-button value="1B-10B">1B-10B</mat-radio-button>
+                    <mat-radio-button value="over 50B">Over 50B</mat-radio-button>
+                  </div>
+                  <div class="turnover-2">
+                    <mat-radio-button value="1M-5M">1M-5M</mat-radio-button>
+                    <mat-radio-button value="10M-20M">10M-20M</mat-radio-button>
+                    <mat-radio-button value="50M-1B">50M-1B</mat-radio-button>
+                    <mat-radio-button value="10B-50B">10B-50B</mat-radio-button>
+                  </div>
+                </mat-radio-group>
+                <div *ngIf="this.applyLoan.turnOverRange.invalid">
+                  <small *ngIf="this.applyLoan.turnOverRange.errors?.required" class="text-danger">*Annual turnover
+                    range is required</small>
+                </div>
+
+                <label>Projected Turnover (KES)<span class="asterix">*</span></label>
+                <mat-radio-group class="turnover" formControlName="projectedTurnOver">
+                  <div class="turnover-1">
+                    <mat-radio-button value="0-1M">0-1M</mat-radio-button>
+                    <mat-radio-button value="5M-10M">5M-10M</mat-radio-button>
+                    <mat-radio-button value="20M-50M">20M-50M</mat-radio-button>
+                    <mat-radio-button value="1B-10B">1B-10B</mat-radio-button>
+                    <mat-radio-button value="over 50B">Over 50B</mat-radio-button>
+                  </div>
+                  <div class="turnover-2">
+                    <mat-radio-button value="1M-5M">1M-5M</mat-radio-button>
+                    <mat-radio-button value="10M-20M">10M-20M</mat-radio-button>
+                    <mat-radio-button value="50M-1B">50M-1B</mat-radio-button>
+                    <mat-radio-button value="10B-50B">10B-50B</mat-radio-button>
+                  </div>
+                </mat-radio-group>
+                <div *ngIf="this.applyLoan.projectedTurnOver.invalid">
+                  <small *ngIf="this.applyLoan.projectedTurnOver.errors?.required" class="text-danger">*Projected
+                    turnover is required</small>
+                </div>
+
+                <label>Last 12 months financial performance in Kenya Shillings:</label>
+                <div class="date-range">
+                  <div class="date-range-1">
+                    <label>Date from:<span class="asterix">*</span></label>
+                    <div class="date-picker">
+                      <input [matDatepicker]="pickerFrom" formControlName="dateFrom" type="text" readonly
+                        [ngClass]="{'is-invalid': this.applyLoan.dateFrom.invalid}">
+                      <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerFrom></mat-datepicker>
+                    </div>
+                    <div *ngIf="this.applyLoan.dateFrom.invalid">
+                      <small *ngIf="this.applyLoan.dateFrom.errors?.required" class="text-danger">*Start Date is
+                        required</small>
+                    </div>
+
+                    <label>Sales</label>
+                    <input type="number" formControlName="sales">
+
+                    <label>Operating Expenses</label>
+                    <input type="number" formControlName="operatingExp">
+
+                    <label>Net Profit Before Tax<span class="asterix">*</span></label>
+                    <input type="number" formControlName="netProfitBeforeTax"
+                      [ngClass]="{'is-invalid': this.applyLoan.netProfitBeforeTax.invalid}">
+                    <div *ngIf="this.applyLoan.netProfitBeforeTax.invalid">
+                      <small *ngIf="this.applyLoan.netProfitBeforeTax.errors?.required" class="text-danger">*Net profit
+                        before tax is required</small>
+                    </div>
+
+                  </div>
+                  <div class="date-range-2">
+                    <label>Date to:<span class="asterix">*</span></label>
+                    <div class="date-picker">
+                      <input [matDatepicker]="pickerTo" formControlName="dateTo" type="text" readonly
+                        [ngClass]="{'is-invalid': this.applyLoan.dateTo.invalid}">
+                      <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerTo></mat-datepicker>
+                    </div>
+                    <div *ngIf="this.applyLoan.dateTo.invalid">
+                      <small *ngIf="this.applyLoan.dateTo.errors?.required" class="text-danger">*End date is
+                        required</small>
+                    </div>
+
+                    <label>Cost of Sales</label>
+                    <input type="number" formControlName="costOfSlaes">
+
+                    <label>Gross Profit<span class="asterix">*</span></label>
+                    <input type="number" formControlName="grossProfit"
+                      [ngClass]="{'is-invalid': this.applyLoan.grossProfit.invalid}">
+                    <div *ngIf="this.applyLoan.grossProfit.invalid">
+                      <small *ngIf="this.applyLoan.grossProfit.errors?.required" class="text-danger">*Gross Profit is
+                        required</small>
+                    </div>
+                  </div>
+                </div>
+
+                <label>As at last end month:</label>
+                <div>
+                  <label>Value of Stock Held</label>
+                  <input type="number" formControlName="stockValue">
+
+                  <label>Trade Debtors O/S</label>
+                  <input type="text" formControlName="tradeDebtor">
+
+                  <label>Trade Creditor O/S</label>
+                  <input type="text" formControlName="tradeCreditor">
+
+                  <label>Other Debts</label>
+                  <input type="text" formControlName="otherDebts">
+
+                  <label>Paid up Capital</label>
+                  <input type="text" formControlName="capitalPaid">
+                </div>
+
+                <label>Countries of Operation<span class="asterix">*</span></label>
+                <div class="country-selector">
+                  <mat-form-field appearance="fill"
+                    [ngClass]="{'is-invalid': this.applyLoan.countriesOperating.invalid}">
+                    <mat-label>Countries</mat-label>
+                    <mat-select formControlName="countriesOperating" multiple>
+                      <mat-option *ngFor="let country of countries" [value]="country">{{country}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="this.applyLoan.countriesOperating.invalid">
+                    <small *ngIf="this.applyLoan.countriesOperating.errors?.required" class="text-danger">*Countries of
+                      operation is required</small>
+                  </div>
+                </div>
+
+                <label><b>Business Address<span class="asterix">*</span></b></label>
+                <div formGroupName="address">
+                  <label>Building<span class="asterix">*</span></label>
+                  <input type="text" formControlName="building"
+                    [ngClass]="{'is-invalid': this.applyLoan.businessBuilding.invalid}">
+                  <div *ngIf="this.applyLoan.businessBuilding.invalid">
+                    <small *ngIf="this.applyLoan.businessBuilding.errors?.required" class="text-danger">*Business
+                      address is required</small>
+                  </div>
+
+                  <label>Street/Road<span class="asterix">*</span></label>
+                  <input type="text" formControlName="street"
+                    [ngClass]="{'is-invalid': this.applyLoan.businessStreet.invalid}">
+                  <div *ngIf="this.applyLoan.businessStreet.invalid">
+                    <small *ngIf="this.applyLoan.businessStreet.errors?.required" class="text-danger">*Street name is
+                      required</small>
+                  </div>
+
+                  <label>County<span class="asterix">*</span></label>
+                  <input type="text" formControlName="county"
+                    [ngClass]="{'is-invalid': this.applyLoan.businessCounty.invalid}">
+                  <div *ngIf="this.applyLoan.businessCounty.invalid">
+                    <small *ngIf="this.applyLoan.businessCounty.errors?.required" class="text-danger">*County name is
+                      required</small>
+                  </div>
+
+                  <label>Postal Address<span class="asterix">*</span></label>
+                  <input type="text" formControlName="postalAddress"
+                    [ngClass]="{'is-invalid': this.applyLoan.businessPostalAddress.invalid}">
+                  <div *ngIf="this.applyLoan.businessPostalAddress.invalid">
+                    <small *ngIf="this.applyLoan.businessPostalAddress.errors?.required" class="text-danger">*Postal
+                      address is required</small>
+                  </div>
+
+                  <label>Postal Code<span class="asterix">*</span></label>
+                  <input type="text" formControlName="postalCode"
+                    [ngClass]="{'is-invalid': this.applyLoan.businessPostalCode.invalid}">
+                  <div *ngIf="this.applyLoan.businessPostalCode.invalid">
+                    <small *ngIf="this.applyLoan.businessPostalCode.errors?.required" class="text-danger">*Postal code
+                      is required</small>
+                  </div>
+
+                </div>
+
+                <label>Contact Person Name<span class="asterix">*</span></label>
+                <input type="text" formControlName="contactName"
+                  [ngClass]="{'is-invalid': this.applyLoan.contactName.invalid}">
+                <div *ngIf="this.applyLoan.contactName.invalid">
+                  <small *ngIf="this.applyLoan.contactName.errors?.required" class="text-danger">*Contact name is
+                    required</small>
+                </div>
+
+                <label>Contact Person Email<span class="asterix">*</span></label>
+                <input type="email" formControlName="contactEmail"
+                  [ngClass]="{'is-invalid': this.applyLoan.contactEmail.invalid}">
+                <div *ngIf="this.applyLoan.contactEmail.invalid">
+                  <small *ngIf="this.applyLoan.contactEmail.errors?.required" class="text-danger">*Contact email is
+                    required</small>
+                </div>
+
+                <label>Contact Person Mobile<span class="asterix">*</span></label>
+                <input type="number" formControlName="contactMobile"
+                  [ngClass]="{'is-invalid': this.applyLoan.contactMobile.invalid}">
+                <div *ngIf="this.applyLoan.contactMobile.invalid">
+                  <small *ngIf="this.applyLoan.contactMobile.errors?.required" class="text-danger">*Contact mobile is
+                    required</small>
+                </div>
+
+              </div>
+            </ng-container>
+
+            <ng-template #personal>
+              <div formGroupName="personalDetails">
+                <p>To be eligible for the personal loan, you must meet the following criteria:</p>
+                <ol>
+                  <li>Be employed in a reputable organization</li>
+                  <li>Be a Kenyan with Kenyan Identification documentation</li>
+                  <li>Be 18-60 years old</li>
+                </ol>
+                <label>Company you work for: <span class="asterix">*</span></label>
+                <input type="text" formControlName="company" [ngClass]="{'is-invalid': this.applyLoan.company.invalid}">
+                <div *ngIf="this.applyLoan.company.invalid">
+                  <small *ngIf="this.applyLoan.company.errors?.required" class="text-danger">*Company
+                    name is required</small>
+                </div>
+
+                <p><b>Provide the company address details below</b></p>
+                <div formGroupName="companyAddress">
+                  <label>Building:<span class="asterix">*</span></label>
+                  <input type="text" formControlName="building"
+                    [ngClass]="{'is-invalid': this.applyLoan.building.invalid}">
+
+                  <div *ngIf="this.applyLoan.building.invalid">
+                    <small *ngIf="this.applyLoan.building.errors?.required" class="text-danger">*Building name is
+                      required</small>
+                  </div>
+
+                  <label>Street:<span class="asterix">*</span></label>
+                  <input type="text" formControlName="street" [ngClass]="{'is-invalid': this.applyLoan.street.invalid}">
+
+                  <div *ngIf="this.applyLoan.street.invalid">
+                    <small *ngIf="this.applyLoan.street.errors?.required" class="text-danger">*Street name is
+                      required</small>
+                  </div>
+
+                  <label>County:<span class="asterix">*</span></label>
+                  <input type="text" formControlName="county" [ngClass]="{'is-invalid': this.applyLoan.county.invalid}">
+                  <div *ngIf="this.applyLoan.county.invalid">
+                    <small *ngIf="this.applyLoan.county.errors?.required" class="text-danger">*County is
+                      required</small>
+                  </div>
+
+                  <label>Postal Address:<span class="asterix">*</span></label>
+                  <input type="text" formControlName="postalAddress"
+                    [ngClass]="{'is-invalid': this.applyLoan.postalAddress.invalid}">
+                  <div *ngIf="this.applyLoan.postalAddress.invalid">
+                    <small *ngIf="this.applyLoan.postalAddress.errors?.required" class="text-danger">*Postal Address is
+                      required</small>
+                  </div>
+
+                  <label>Postal Code:<span class="asterix">*</span></label>
+                  <input type="text" formControlName="postalCode"
+                    [ngClass]="{'is-invalid': this.applyLoan.postalCode.invalid}">
+                  <div *ngIf="this.applyLoan.postalCode.invalid">
+                    <small *ngIf="this.applyLoan.postalCode.errors?.required" class="text-danger">*Postal Code is
+                      required</small>
+                  </div>
+
+                </div>
+
+                <label>Nature of Employment<span class="asterix">*</span></label>
+                <mat-radio-group formControlName="employmentNature">
+                  <mat-radio-button value="Casual Worker">Casual Worker</mat-radio-button>
+                  <mat-radio-button value="Permanent Worker">Permanent</mat-radio-button>
+                  <mat-radio-button value="Contract Worker">Contract</mat-radio-button>
+                </mat-radio-group>
+                <div *ngIf="this.applyLoan.employmentNature.invalid">
+                  <small *ngIf="this.applyLoan.employmentNature.errors?.required" class="text-danger">*Select the nature
+                    of employment</small>
+                </div>
+
+                <ng-container *ngIf="this.applyLoan.isContract">
+                  <label>Terms of Contract Selected<span class="asterix">*</span></label>
+                  <input type="text" formControlName="contractYears">
+                </ng-container>
+
+                <p><b>How much do you earn in a month in KES?<span class="asterix">*</span></b></p>
+                <mat-radio-group class="turnover" formControlName="earnings">
+                  <div class="turnover-1">
+                    <mat-radio-button value="0 - 50,000">0 - 50,000</mat-radio-button>
+                    <mat-radio-button value="100,001 - 200,000">100,001 - 200</mat-radio-button>
+                    <mat-radio-button value="Over 300,001">Over 300,001</mat-radio-button>
+                  </div>
+                  <div class="turnover-2">
+                    <mat-radio-button value="50,001–100,000">50,001 – 100,000</mat-radio-button>
+                    <mat-radio-button value="200,001 – 300,000">200,001 – 300,000</mat-radio-button>
+                  </div>
+                </mat-radio-group>
+                <div *ngIf="this.applyLoan.earnings.invalid">
+                  <small *ngIf="this.applyLoan.earnings.errors?.required" class="text-danger">*Earnings are
+                    required</small>
+                </div>
+
+              </div>
+
+            </ng-template>
+
+          </div>
+
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button" style="margin-left: 10px;">Next</button>
+          </div>
+        </mat-step>
+
+
+        <!-- APPLICANT DETAILS STEP -->
+        <mat-step formGroupName="1" [stepControl]="this.applyLoan.loanApplicationArray?.get([1])">
+          <ng-template matStepLabel>Applicant Details</ng-template>
+          <label>Title<span class="asterix">*</span></label>
+          <select formControlName="title" [ngClass]="{'is-invalid': this.applyLoan.applicantTitle.invalid}">
+            <option *ngFor="let item of title" [value]="item">{{item}}</option>
+          </select>
+          <div *ngIf="this.applyLoan.applicantTitle.invalid">
+            <small *ngIf="this.applyLoan.applicantTitle.errors?.required" class="text-danger">*Title is
+              required</small>
+          </div>
+
+          <label>First Name:<span class="asterix">*</span></label>
+          <input type="text" formControlName="firstName" [ngClass]="{'is-invalid': this.applyLoan.firstName.invalid}">
+          <div *ngIf="this.applyLoan.firstName.invalid">
+            <small *ngIf="this.applyLoan.firstName.errors?.required" class="text-danger">*First name is
+              required</small>
+          </div>
+
+          <label>Middle Name:</label>
+          <input type="text" formControlName="middleName">
+
+          <label>Last Name:<span class="asterix">*</span></label>
+          <input type="text" formControlName="lastName" [ngClass]="{'is-invalid': this.applyLoan.lastName.invalid}">
+          <div *ngIf="this.applyLoan.lastName.invalid">
+            <small *ngIf="this.applyLoan.lastName.errors?.required" class="text-danger">*Last name is
+              required</small>
+          </div>
+
+          <label>Gender:<span class="asterix">*</span></label>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+          </mat-radio-group>
+          <div *ngIf="this.applyLoan.gender.invalid">
+            <small *ngIf="this.applyLoan.gender.errors?.required" class="text-danger">*Gender is
+              required</small>
+          </div>
+
+          <label>Marital Status:<span class="asterix">*</span></label>
+          <select formControlName="maritalStatus" [ngClass]="{'is-invalid': this.applyLoan.maritalStatus.invalid}">
+            <option *ngFor="let item of maritalStatus" [value]="item">{{item}}</option>
+          </select>
+          <div *ngIf="this.applyLoan.maritalStatus.invalid">
+            <small *ngIf="this.applyLoan.maritalStatus.errors?.required" class="text-danger">*Marital Status
+              is required</small>
+          </div>
+
+          <label>National ID/ Passport Number:<span class="asterix">*</span></label>
+          <input type="text" formControlName="id" [ngClass]="{'is-invalid': this.applyLoan.id.invalid}">
+          <div *ngIf="this.applyLoan.id.invalid">
+            <small *ngIf="this.applyLoan.id.errors?.required" class="text-danger">*National ID/ Passport
+              Number is required</small>
+          </div>
+
+          <label>KRA Pin:<span class="asterix">*</span></label>
+          <input type="text" formControlName="kraPin"
+            [ngClass]="{'is-invalid': this.applyLoan.applicantKraPin.invalid}">
+          <div *ngIf="this.applyLoan.applicantKraPin.invalid">
+            <small *ngIf="this.applyLoan.applicantKraPin.errors?.required" class="text-danger">*KRA Pin is
+              required</small>
+          </div>
+
+          <label>Nationality:<span class="asterix">*</span></label>
+          <select formControlName="nationality" [ngClass]="{'is-invalid': this.applyLoan.nationality.invalid}">
+            <option *ngFor="let item of nationality" [value]="item">{{item}}</option>
+          </select>
+          <div *ngIf="this.applyLoan.nationality.invalid">
+            <small *ngIf="this.applyLoan.nationality.errors?.required" class="text-danger">*Nationality is
+              required</small>
+          </div>
+
+          <label>Date of Birth:<span class="asterix">*</span></label>
+          <div class="date-picker">
+            <input [matDatepicker]="dob" formControlName="dob" type="text" readonly
+              [ngClass]="{'is-invalid': this.applyLoan.dob.invalid}">
+            <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+            <mat-datepicker #dob></mat-datepicker>
+          </div>
+          <div *ngIf="this.applyLoan.dob.invalid">
+            <small *ngIf="this.applyLoan.dob.errors?.required" class="text-danger">*Date of Birth is
+              required</small>
+          </div>
+
+          <label>Social Media Link (Facebook/ Twitter/ LinkedIn):</label>
+          <input type="text" formControlName="socialMedia">
+
+          <!-- Additional Applicant -->
+          <div class="another-applicant">
+            <div formArrayName="addedApplicants">
+              <div *ngFor="let applicant of this.applyLoan.addedApplicantsForm.controls; let i=index"
+                [formGroupName]="i">
+
+                <label>Title:<span class="asterix">*</span></label>
+                <select formControlName="addedApplicantTitle">
+                  <option *ngFor="let item of title" [value]="item">{{item}}</option>
+                </select>
+
+                <label>First Name:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedApplicantFirstName">
+
+                <label>Middle Name:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedApplicantMiddleName">
+
+                <label>Last Name:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedApplicantLastName">
+
+                <label>Gender:<span class="asterix">*</span></label>
+                <mat-radio-group formControlName="addedApplicantGender">
+                  <mat-radio-button value="Male">Male</mat-radio-button>
+                  <mat-radio-button value="Female">Female</mat-radio-button>
+                </mat-radio-group>
+
+                <label>Marital Status:<span class="asterix">*</span></label>
+                <select formControlName="addedApplicantMaritalStatus">
+                  <option *ngFor="let item of maritalStatus" [value]="item">{{item}}</option>
+                </select>
+
+                <label>National ID/ Passport Number:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedApplicantId">
+
+                <label>KRA Pin:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedApplicantKraPin">
+
+                <label>Nationality:<span class="asterix">*</span></label>
+                <select formControlName="addedApplicantNationality">
+                  <option *ngFor="let item of nationality" [value]="item">{{item}}</option>
+                </select>
+
+                <label>Date of Birth:<span class="asterix">*</span></label>
+                <div class="date-picker">
+                  <input [matDatepicker]="dob" formControlName="addedApplicantDob" type="text" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                  <mat-datepicker #dob></mat-datepicker>
+                </div>
+
+                <label>Social Media Link (Facebook/ Twitter/ LinkedIn):<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedApplicantSocialMedia">
+
+                <button class="danger" (click)="this.applyLoan.removeApplicant(i)">Remove
+                  Applicant</button>
+              </div>
+
+            </div>
+          </div>
+          <button type="button" (click)="this.applyLoan.addApplicant()">Add another applicant</button>
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button" style="margin-left: 10px;">Next</button>
+          </div>
+
+        </mat-step>
+
+
+        <!-- LOAN DETAILS STEP -->
+        <mat-step formGroupName="2" [stepControl]="this.applyLoan.loanApplicationArray?.get([2])">
+          <ng-template matStepLabel>Loan Details</ng-template>
+          <label>Select the type of loan facility you are applying for:<span class="asterix">*</span></label>
+
+          <ng-container *ngIf="this.applyLoan.isBusiness; else personalLoans">
+            <select formControlName="loanFacilityType"
+              [ngClass]="{'is-invalid': this.applyLoan.loanTypeFacility.invalid}">
+              <option *ngFor="let loan of this.applyLoan.businessLoanFeature" [value]="loan.type">
+                {{loan.facility}}
+              </option>
+            </select>
+
+            <div *ngIf="this.applyLoan.loanTypeFacility.invalid">
+              <small *ngIf="this.applyLoan.loanTypeFacility.errors?.required" class="text-danger">*Kindly
+                select the loan type</small>
+            </div>
+          </ng-container>
+
+          <ng-template #personalLoans>
+            <select formControlName="loanFacilityType"
+              [ngClass]="{'is-invalid': this.applyLoan.loanTypeFacility.invalid}">
+              <option *ngFor="let loan of this.applyLoan.personalLoanFeature" [value]="loan.type">
+                {{loan.facility}}
+              </option>
+            </select>
+            <div *ngIf="this.applyLoan.loanTypeFacility.invalid">
+              <small *ngIf="this.applyLoan.loanTypeFacility.errors?.required" class="text-danger">*Kindly
+                select the loan type</small>
+            </div>
+          </ng-template>
+
+          <label>How much would you like to borrow?<span class="asterix">*</span></label>
+          <input type="number" formControlName="borrowAmount"
+            [ngClass]="{'is-invalid': this.applyLoan.borrowAmount.invalid}">
+
+          <div *ngIf="this.applyLoan.borrowAmount.invalid">
+            <small *ngIf="this.applyLoan.borrowAmount.errors?.required" class="text-danger">*Borrow amount
+              is required</small>
+          </div>
+
+          <label>Purpose of Loan<span class="asterix">*</span></label>
+          <select formControlName="loanPurpose" [ngClass]="{'is-invalid': this.applyLoan.loanPurpose.invalid}">
+            <option *ngFor="let item of loanPurpose" [value]="item">{{item}}</option>
+          </select>
+
+          <div *ngIf="this.applyLoan.loanPurpose.invalid">
+            <small *ngIf="this.applyLoan.loanPurpose.errors?.required" class="text-danger">*Purpose of loan
+              is required</small>
+          </div>
+
+          <label>Repayment Period(in months)<span class="asterix">*</span></label>
+          <input type="text" formControlName="repaymentPeriod"
+            [ngClass]="{'is-invalid': this.applyLoan.repaymentPeriod.invalid}">
+          <div *ngIf="this.applyLoan.repaymentPeriod.invalid">
+            <small *ngIf="this.applyLoan.repaymentPeriod.errors?.required" class="text-danger">*Repayment
+              period is required</small>
+          </div>
+
+          <p>Do you have loan facilities with other institutions?<span class="asterix">*</span></p>
+          <mat-radio-group formControlName="otherInstitutions">
+            <mat-radio-button value="Yes">Yes</mat-radio-button>
+            <mat-radio-button value="No">No</mat-radio-button>
+          </mat-radio-group>
+          <div *ngIf="this.applyLoan.otherInstitutions.invalid">
+            <small *ngIf="this.applyLoan.otherInstitutions.errors?.required" class="text-danger">*Required</small>
+          </div>
+
+          <ng-container *ngIf="this.applyLoan.hasOtherInstitution">
+            <label>Financial Institution:<span class="asterix">*</span></label>
+            <input type="text" formControlName="financialInstitution"
+              [ngClass]="{'is-invalid': this.applyLoan.financialInstitution.invalid}">
+            <div *ngIf="this.applyLoan.financialInstitution.invalid">
+              <small *ngIf="this.applyLoan.financialInstitution.errors?.required" class="text-danger">*Financial
+                institution is required</small>
+            </div>
+
+            <label>Loan Amount<span class="asterix">*</span></label>
+            <input type="number" formControlName="loanAmount"
+              [ngClass]="{'is-invalid': this.applyLoan.loanAmount.invalid}">
+            <div *ngIf="this.applyLoan.loanAmount.invalid">
+              <small *ngIf="this.applyLoan.loanAmount.errors?.required" class="text-danger">*Loan amount
+                is required</small>
+            </div>
+
+            <label>Outstanding Balance<span class="asterix">*</span></label>
+            <input type="number" formControlName="outStandingBalance"
+              [ngClass]="{'is-invalid': this.applyLoan.outStandingBalance.invalid}">
+            <div *ngIf="this.applyLoan.outStandingBalance.invalid">
+              <small *ngIf="this.applyLoan.outStandingBalance.errors?.required" class="text-danger">*Outstanding balance
+                is required</small>
+            </div>
+
+            <label>Loan Type<span class="asterix">*</span></label>
+            <select formControlName="loanType" [ngClass]="{'is-invalid': this.applyLoan.institutionLoanType.invalid}">
+              <option *ngFor="let item of this.applyLoan.loanTypeArray" [value]="item">{{item}}</option>
+            </select>
+            <div *ngIf="this.applyLoan.institutionLoanType.invalid">
+              <small *ngIf="this.applyLoan.institutionLoanType.errors?.required" class="text-danger">*Loan
+                type is required</small>
+            </div>
+
+            <label>Repayment Amount per Month<span class="asterix">*</span></label>
+            <input type="number" formControlName="repaymentAmountMonthly"
+              [ngClass]="{'is-invalid': this.applyLoan.repaymentAmountMonthly.invalid}">
+            <div *ngIf="this.applyLoan.repaymentAmountMonthly.invalid">
+              <small *ngIf="this.applyLoan.repaymentAmountMonthly.errors?.required" class="text-danger">*Repayment
+                amount is required</small>
+            </div>
+
+            <div class="another-applicant" formArrayName="addedInstitution">
+              <div *ngFor="let institution of this.applyLoan.addedInstitutionsForm.controls; let i=index"
+                [formGroupName]="i">
+
+                <label>Financial Institution:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedFinancialInstitution">
+
+                <label>Loan Amount<span class="asterix">*</span></label>
+                <input type="number" formControlName="addedLoanAmount">
+
+                <label>Outstanding Balance<span class="asterix">*</span></label>
+                <input type="number" formControlName="addedOutstandingBalance">
+
+                <label>Loan Type<span class="asterix">*</span></label>
+                <select formControlName="addedLoanType">
+                  <option *ngFor="let item of this.applyLoan.loanTypeArray" [value]="item">{{item}}
+                  </option>
+                </select>
+
+                <label>Repayment Amount per Month<span class="asterix">*</span></label>
+                <input type="number" formControlName="addedRepaymentMonthly">
+
+                <button class="danger" (click)="this.applyLoan.removeInstitution(i)">Remove
+                  Institution</button>
+
+              </div>
+
+            </div>
+            <button type="button" (click)="this.applyLoan.addInstitution()">Add Another Loan
+              Facility</button>
+
+            <p>State the accounts held with other financial institutions:</p>
+            <label>Account Name:<span class="asterix">*</span></label>
+            <input type="text" formControlName="accountName"
+              [ngClass]="{'is-invalid': this.applyLoan.accountName.invalid}">
+            <div *ngIf="this.applyLoan.accountName.invalid">
+              <small *ngIf="this.applyLoan.accountName.errors?.required" class="text-danger">*Account name
+                is required</small>
+            </div>
+
+            <label>Account Number:<span class="asterix">*</span></label>
+            <input type="number" formControlName="accountNumber"
+              [ngClass]="{'is-invalid': this.applyLoan.accountNumber.invalid}">
+            <div *ngIf="this.applyLoan.accountNumber.invalid">
+              <small *ngIf="this.applyLoan.accountNumber.errors?.required" class="text-danger">*Account
+                number is required</small>
+            </div>
+
+            <label>Financial Institution:<span class="asterix">*</span></label>
+            <input type="text" formControlName="finInstitution"
+              [ngClass]="{'is-invalid': this.applyLoan.finInstitution.invalid}">
+            <div *ngIf="this.applyLoan.finInstitution.invalid">
+              <small *ngIf="this.applyLoan.finInstitution.errors?.required" class="text-danger">*Financial
+                institution name is required</small>
+            </div>
+
+            <label>Branch:<span class="asterix">*</span></label>
+            <input type="text" formControlName="branch" [ngClass]="{'is-invalid': this.applyLoan.branch.invalid}">
+            <div *ngIf="this.applyLoan.branch.invalid">
+              <small *ngIf="this.applyLoan.branch.errors?.required" class="text-danger">*Branch name is
+                required</small>
+            </div>
+
+            <!-- Added account -->
+            <div class="another-applicant" formArrayName="addedAccount">
+              <div *ngFor="let account of this.applyLoan.addedAccountsForm.controls; let i=index" [formGroupName]="i">
+
+                <label>Account Name:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedAccountName">
+
+                <label>Account Number:<span class="asterix">*</span></label>
+                <input type="number" formControlName="addedAccountNumber">
+
+                <label>Financial Institution:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedAccountFinancialInstitution">
+
+                <label>Branch:<span class="asterix">*</span></label>
+                <input type="text" formControlName="addedAccountBranch">
+
+                <button class="danger" (click)="this.applyLoan.removeAccount(i)">Remove Account</button>
+
+              </div>
+            </div>
+
+            <button (click)="this.applyLoan.addAccount()">Add another account</button><br>
+
+            <!-- Collateral type section -->
+            <label>Collateral Type<span class="asterix">*</span></label>
+            <div formGroupName="collateral">
+              <select formControlName="collateralType"
+                [ngClass]="{'is-invalid': this.applyLoan.collateralType.invalid}">
+                <option *ngFor="let item of this.applyLoan.collateralTypes" [value]="item">{{item}}
+                </option>
+              </select>
+
+              <div *ngIf="this.applyLoan.collateralType.invalid">
+                <small *ngIf="this.applyLoan.collateralType.errors?.required" class="text-danger">*Collateral type is
+                  required</small>
+              </div>
+
+              <!-- Land -->
+              <div *ngIf="this.applyLoan.land" class="required-docs">
+                <span>Copy of Title Deed proposed as security<span class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="titleDeed" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.titleDeed.invalid">
+                    <small *ngIf="this.applyLoan.titleDeed.errors?.required" class="text-danger">*Land
+                      title Deed is required</small>
+                  </div>
+                </div>
+
+
+                <span>Copy of latest land rent and rates payment<span class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="rentRates" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.rentRates.invalid">
+                    <small *ngIf="this.applyLoan.rentRates.errors?.required" class="text-danger">*Land
+                      rent and rates document is required</small>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Property and Buildings -->
+              <div *ngIf="this.applyLoan.propertyBuildings" class="required-docs">
+                <span>Copy of Title Deed proposed as security<span class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="titleDeed" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.titleDeed.invalid">
+                    <small *ngIf="this.applyLoan.titleDeed.errors?.required" class="text-danger">*Property and buildings
+                      title deed is required</small>
+                  </div>
+                </div>
+
+
+                <span>Copy of latest land rent and rates payment<span class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="rentRates" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.rentRates.invalid">
+                    <small *ngIf="this.applyLoan.rentRates.errors?.required" class="text-danger">*Property land rent and
+                      rates document is
+                      required</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Shares List -->
+              <div *ngIf="this.applyLoan.shares" class="required-docs">
+                <span>List of shares from Stock Broker and CDS Statement (where applicable)<span
+                    class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="sharesList" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.sharesList.invalid">
+                    <small *ngIf="this.applyLoan.sharesList.errors?.required" class="text-danger">*Shares list document
+                      is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chattels -->
+              <div *ngIf="this.applyLoan.chattels" class="required-docs">
+                <span>Copy of Logbook and Valuation report proposed as security<span class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="logBook" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.logBook.invalid">
+                    <small *ngIf="this.applyLoan.logBook.errors?.required" class="text-danger">*Logbook
+                      and valuation report is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Post Dated Cheques -->
+              <div *ngIf="this.applyLoan.postDated" class="required-docs">
+                <span>Copy of signed cheque<span class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="cheque" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.cheque.invalid">
+                    <small *ngIf="this.applyLoan.cheque.errors?.required" class="text-danger">*Copy
+                      of
+                      signed cheque is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Insurance -->
+              <div *ngIf="this.applyLoan.insurance" class="required-docs">
+                <span>Copy of the insurance policy document<span class="asterix">*</span></span>
+                <div class="file-picker">
+                  <div appDropzone>
+                    <input formControlName="insuranceDoc" type="file" class="file-input"
+                      (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                  </div>
+                  <div *ngIf="this.applyLoan.insuranceDoc.invalid">
+                    <small *ngIf="this.applyLoan.insuranceDoc.errors?.required" class="text-danger">*Insurance policy
+                      document is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Added Collateral section -->
+              <div class="added-collateral" formArrayName="addedCollateral">
+                <div *ngFor="let col of this.applyLoan.addedCollateralForm.controls; let i=index" [formGroupName]="i">
+
+                  <select formControlName="addedCollateralType">
+                    <option *ngFor="let item of this.applyLoan.collateralTypes" [value]="item">
+                      {{item}}</option>
+                  </select>
+
+                  <!-- Land -->
+                  <div *ngIf="this.applyLoan.land" class="required-docs">
+                    <span>Copy of Title Deed proposed as security<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedTitleDeed" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+
+                    <span>Copy of latest land rent and rates payment<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedRentRates" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Property and Buildings -->
+                  <div *ngIf="this.applyLoan.propertyBuildings" class="required-docs">
+                    <span>Copy of Title Deed proposed as security<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedTitleDeed" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+
+
+                    <span>Copy of latest land rent and rates payment<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedRentRates" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Shares List -->
+                  <div *ngIf="this.applyLoan.shares" class="required-docs">
+                    <span>List of shares from Stock Broker and CDS Statement (where
+                      applicable)<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedSharesList" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Chattels -->
+                  <div *ngIf="this.applyLoan.chattels" class="required-docs">
+                    <span>Copy of Logbook and Valuation report proposed as security<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedLogBook" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Post Dated Cheques -->
+                  <div *ngIf="this.applyLoan.postDated" class="required-docs">
+                    <span>Copy of signed cheque<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedCheque" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Insurance -->
+                  <div *ngIf="this.applyLoan.insurance" class="required-docs">
+                    <span>Copy of the insurance policy document<span class="asterix">*</span></span>
+                    <div class="file-picker">
+                      <div appDropzone>
+                        <input formControlName="addedInsuranceDoc" type="file" class="file-input"
+                          (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="danger" (click)="this.applyLoan.removeCollateral(i)">Remove
+                    Collateral</button>
+
+                </div>
+              </div>
+
+              <button type="button" (click)="this.applyLoan.addCollateral()">Add Another
+                Collateral</button>
+            </div>
+
+
+          </ng-container>
+
+
+          <!-- Uploading document section -->
+          <p><b>Now, we would like you to scan and upload copies of various documents as requested below:</b>
+          </p>
+          <label></label>
+
+          <label>Applicant 1 National ID<span class="asterix">*</span></label>
+          <div class="file-picker">
+            <div appDropzone>
+              <input formControlName="idCopy" type="file" class="file-input"
+                (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+            </div>
+            <div *ngIf="this.applyLoan.idCopy.invalid">
+              <small *ngIf="this.applyLoan.idCopy.errors?.required" class="text-danger">*Copy of national
+                ID is required </small>
+            </div>
+
+            <div *ngIf="this.applyLoan.file">
+              <div *ngIf="this.applyLoan.percentage | async as pct">
+                <progress [value]="pct" max="100"></progress>
+                <small>{{pct | number}}% uploaded</small>
+              </div>
+
+              <div *ngIf="this.applyLoan.snapshot | async as snap">
+                File Uploaded
+              </div>
+            </div>
+          </div>
+
+
+
+          <label>Applicant 1 KRA Certificate<span class="asterix">*</span></label>
+          <div class="file-picker">
+            <div appDropzone>
+              <input formControlName="kraCopy" type="file" class="file-input"
+                (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+            </div>
+            <div *ngIf="this.applyLoan.kraCopy.invalid">
+              <small *ngIf="this.applyLoan.kraCopy.errors?.required" class="text-danger">*Copy of
+                KRA certificate is required</small>
+            </div>
+          </div>
+
+          <label>Applicant 1 Passport Size Photo<span class="asterix">*</span></label>
+          <div class="file-picker">
+            <div appDropzone>
+              <input formControlName="passportImg" type="file" class="file-input"
+                (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+            </div>
+            <div *ngIf="this.applyLoan.passportImg.invalid">
+              <small *ngIf="this.applyLoan.passportImg.errors?.required" class="text-danger">*Passport-size
+                photo is required</small>
+            </div>
+          </div>
+
+
+          <label>Applicant 1 Latest 3 Months Pay Slips<span class="asterix">*</span></label>
+          <div class="file-picker">
+            <div appDropzone>
+              <input formControlName="paySlips" type="file" class="file-input"
+                (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+            </div>
+            <div *ngIf="this.applyLoan.paySlips.invalid">
+              <small *ngIf="this.applyLoan.paySlips.errors?.required" class="text-danger">*3 months pay
+                slips
+                document is required</small>
+            </div>
+          </div>
+
+
+
+          <label>Applicant 1 Letter of Introduction from Employer<span class="asterix">*</span></label>
+          <div class="file-picker">
+            <div appDropzone>
+              <input formControlName="letterIntro" type="file" class="file-input"
+                (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+            </div>
+            <div *ngIf="this.applyLoan.letterIntro.invalid">
+              <small *ngIf="this.applyLoan.letterIntro.errors?.required" class="text-danger">*Letter of
+                introduction from Employer is required</small>
+            </div>
+          </div>
+
+
+          <label>Applicant 1 Letter of Undertaking from Employer<span class="asterix">*</span></label>
+          <div class="file-picker">
+            <div appDropzone>
+              <input formControlName="letterUndertaking" type="file" class="file-input"
+                (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+            </div>
+            <div *ngIf="this.applyLoan.letterUndertaking.invalid">
+              <small *ngIf="this.applyLoan.letterUndertaking.errors?.required" class="text-danger">*Letter
+                of undertaking from Employer is required</small>
+            </div>
+          </div>
+
+
+
+
+
+          <!-- Added applicant document upload section -->
+          <div formArrayName="addedApplicantDocs">
+            <div *ngFor="let addedApplicant of this.applyLoan.addedApplicantDocumentsForm.controls; let i=index"
+              [formGroupName]="i">
+
+
+              <label>Applicant {{i+2}} National ID<span class="asterix">*</span></label>
+              <div class="file-picker">
+                <div appDropzone>
+                  <input formControlName="addedApplicantIdCopy" type="file" class="file-input"
+                    (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                </div>
+              </div>
+
+
+              <label>Applicant {{i+2}} KRA Certificate<span class="asterix">*</span></label>
+              <div class="file-picker">
+                <div appDropzone>
+                  <input formControlName="addedApplicantKraCopy" type="file" class="file-input"
+                    (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                </div>
+              </div>
+
+
+              <label>Applicant {{i+2}} Passport Size Photo<span class="asterix">*</span></label>
+              <div class="file-picker">
+                <div appDropzone>
+                  <input formControlName="addedApplicantImg" type="file" class="file-input"
+                    (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <ng-container *ngIf="this.applyLoan.isBusinessLoan">
+
+            <h4>Upload the documents as instructed below</h4>
+            <label>Business Certificate<span class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="businessCert" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)"
+                  [ngClass]="{'is-invalid': this.applyLoan.businessCert.invalid}">
+              </div>
+            </div>
+            <div *ngIf="this.applyLoan.businessCert.invalid">
+              <small *ngIf="this.applyLoan.businessCert.errors?.required" class="text-danger">*Business
+                certificate is required</small>
+            </div>
+
+
+            <label>(If limited company) Upload copy of Memorandum and Articles of Association for
+              limited companies.<span class="asterix">*</span>
+            </label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="certIMAA" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.certIMAA.invalid">
+                <small *ngIf="this.applyLoan.certIMAA.errors?.required" class="text-danger">*Memorandum
+                  and
+                  Articles of Association is required</small>
+              </div>
+            </div>
+
+
+            <label>Business Registration Certificate and Partnership Deed (Sole
+              Proprietors/Partnerships)<span class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="businessRegCert" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.businessRegCert.invalid">
+                <small *ngIf="this.applyLoan.businessRegCert.errors?.required" class="text-danger">*Business
+                  registration certificate is required</small>
+              </div>
+            </div>
+
+
+
+            <label>Latest CR 12<span class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="latestCR12" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.latestCR12.invalid">
+                <small *ngIf="this.applyLoan.latestCR12.errors?.required" class="text-danger">*Latest CR
+                  12
+                  is required</small>
+              </div>
+            </div>
+
+            <label>Business KRA Certificate<span class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="businessKraCopy" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.businessKraCopy.invalid">
+                <small *ngIf="this.applyLoan.businessKraCopy.errors?.required" class="text-danger">*Business
+                  KRA certificate is required</small>
+              </div>
+            </div>
+
+
+            <label>Directors’/ Partner’s/ Sole Proprietor’s IDs and KRA PINs<span class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="directorIdKra" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.directorIdKra.invalid">
+                <small *ngIf="this.applyLoan.directorIdKra.errors?.required" class="text-danger">*Required</small>
+              </div>
+            </div>
+
+
+            <label>Latest Annual Returns</label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="latestAnnualReturns" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.latestAnnualReturns.invalid">
+                <small *ngIf="this.applyLoan.latestAnnualReturns.errors?.required" class="text-danger">*Latest annual
+                  returns is required</small>
+              </div>
+            </div>
+
+            <label>Latest 6 months Bank Statements:<span class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="bankStatement" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.bankStatement.invalid">
+                <small *ngIf="this.applyLoan.bankStatement.errors?.required" class="text-danger">*Latest
+                  6
+                  months bank statement is required</small>
+              </div>
+            </div>
+
+
+            <label>Original/Copy of Invoices and LPOs (Required for Invoice Discounting loan type)<span
+                class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="invoiceCopy" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.invoiceCopy.invalid">
+                <small *ngIf="this.applyLoan.invoiceCopy.errors?.required" class="text-danger">*Required</small>
+              </div>
+            </div>
+
+            <label>Audited Accounts for the last 3 years and latest Management Accounts<span
+                class="asterix">*</span></label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="auditedManagementAccounts" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.auditedManagementAccounts.invalid">
+                <small *ngIf="this.applyLoan.auditedManagementAccounts.errors?.required"
+                  class="text-danger">*Required</small>
+              </div>
+            </div>
+
+
+            <label>Cash Flow Projections for the next 12 months</label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="projections" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.projections.invalid">
+                <small *ngIf="this.applyLoan.projections.errors?.required" class="text-danger">*Cash
+                  flow
+                  projections for the next 12 months is required</small>
+              </div>
+            </div>
+
+            <label>Latest Ageing Reports for Debtors and Creditors</label>
+            <div class="file-picker">
+              <div appDropzone>
+                <input formControlName="ageingReports" type="file" class="file-input"
+                  (change)="this.applyLoan.onDrop($event.target.files[0], loanId.getLoanId)">
+              </div>
+              <div *ngIf="this.applyLoan.ageingReports.invalid">
+                <small *ngIf="this.applyLoan.ageingReports.errors?.required" class="text-danger">*Copy
+                  of
+                  signed cheque is required</small>
+              </div>
+
+            </div>
+
+          </ng-container>
+          <h5><b>Please Note: the original documents will be requested before disbursement of the loan. If
+              your
+              application for a loan is agreed in principle, then a formal valuation of any security
+              may be required at your cost.</b></h5>
+
+          <p><b>I / We authorize you to obtain any information you may require to this application from
+              any source to which you may apply, each source being here by authorized by me to provide
+              you with such information. I/We undertake to notify the financial institution
+              immediately of any situation which materially changes the representation of this
+              application. I/We hereby authorize the financial institution to disclose any and all
+              information in respect of my/ our account to the guarantors for as long as the
+              guarantors’ liability of this debt outstands.
+              I / We confirm that I am/We are in good health. I/ We hereby certify that no credit
+              facilities availed of from any bank were recalled and/or no legal action has been
+              initiated by any bank against the company/related companies for non-payment of advances
+              availed of by me/us. I/We, as a per-condition to accepting the terms of any offer of
+              facilities as a result of this application, agree that, in the event of default, Edge
+              Three Sixty Limited may, at its sole discretion, pass the factual and true default
+              information to a Credit Reference Bureau without legal recourse by me/us the applicants
+              herein. I/We have not been adjudged bankrupt I/ We hereby declare that the information
+              stated above is true, correct and complete to the best of my / our knowledge.
+            </b></p>
+          <form [formGroup]="termsAndConditions" class="checks" style="width: 100%;">
+            <div class="t-and-c">
+              <input type="checkbox" formControlName="sign" style="width: 50%;">
+              <span><span class="asterix">*</span>By clicking this button, I agree and sign as the of
+                Organization A on this date
+              </span>
+            </div>
+            <div *ngIf="sign.invalid">
+              <small *ngIf="sign.errors" class="text-danger">*You are required to check the
+                box</small>
+            </div>
+
+            <div class="t-and-c">
+              <input type="checkbox" formControlName="tc" style="width: 50%;">
+              <span><span class="asterix">*</span>I have read and understood the Customer and Product
+                Terms and Conditions.
+              </span>
+            </div>
+            <div *ngIf="tc.invalid">
+              <small *ngIf="tc.errors" class="text-danger">*You are required to check the box</small>
+            </div>
+          </form>
+
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button" style="margin-left: 10px;">Next</button>
+          </div>
+
+        </mat-step>
+
+
+        <!-- SUBMIT FILLED FORM -->
+        <mat-step>
+          <ng-template matStepLabel>Review and Submit</ng-template>
+
+          <div *ngIf="sign.invalid && tc.invalid">
+            <p *ngIf="tc.errors && sign.errors" class="text-danger">*Kindly fill in ALL the required fields
+              to review
+              and submit your loan application</p>
+          </div>
+
+          <div *ngIf="sign.valid && tc.valid">
+            <p><b>Thank you for your application. Please review all the
+                information you have entered. Once you
+                submit the application you will not be able to update the loan application</b></p>
+
+            <button mat-button type="button" (click)="getCurrentLoan(loanId.getLoanId)">See Loan Application
+              Summary</button><br>
+
+            <div *ngIf="viewLoan">
+              <h3>Loan Summary</h3>
+              <div *ngFor="let current of (currentLoan | async)">
+                <!-- Income details -->
+                <h5>Income Details Section</h5>
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Loan Specifics</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" colspan="3">Loan Type</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[0].loanType}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Company</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[0].personalDetails.company}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Company Building</th>
+                      <td>
+                        <i>{{current.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.building}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Company County</th>
+                      <td>
+                        <i>{{current.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.county}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Company Postal Address</th>
+                      <td>
+                        <i>{{current.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.postalAddress}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Company Postal Code</th>
+                      <td>
+                        <i>{{current.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.postalCode}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Company Street</th>
+                      <td>
+                        <i>{{current.loanApplication.loanApplicationArray[0].personalDetails.companyAddress.street}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Employment Nature</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[0].personalDetails.employmentNature}}</i>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row" colspan="3">Earnings</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[0].personalDetails.earnings}}</i>
+                      </td>
+                    </tr>
+
+                    <section *ngIf="current.loanApplication.loanApplicationArray[0]
+                                                .personalDetails.employmentNature == 'Contract Worker'">
+                      <tr>
+                        <th scope="row" colspan="3">Contract Years</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].personalDetails?.contractYears}}</i>
+                        </td>
+                      </tr>
+                    </section>
+
+                    <!-- Business details in 1st step -->
+                    <section *ngIf="current.loanApplication.loanApplicationArray[0]
+                                                .businessDetails.businessName != ''">
+                      <tr>
+                        <th scope="row" colspan="3">Business Name</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.businessName}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Type Of Ownership</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.ownershipType}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Business Registration Number</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.regNumber}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Date of Registration</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.regDate}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Business Industry</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.industry}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">KRA Pin Number</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.kraPin}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">VAT Number</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.vatNumber}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Number of Employees</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.employeesNum}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Number of Years in Business</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.yearsInBusiness}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Annual Turnover Range</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.turnOverRange}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Projected Turnover</th>
+                        <td>
+                          <i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.projectedTurnOver}}</i>
+                        </td>
+                      </tr><br>
+                      <span><b>Last 12 months financial performance in Kenya
+                          Shillings</b></span><br>
+                      <tr>
+                        <th scope="row" colspan="3">Date From</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.dateFrom}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Date To</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.dateTo}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Sales</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.sales}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Cost of Sales</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.businessName}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Operating Expenses</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.operatingExp}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Gross Profit</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.grossProfit}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Net Profit Before Tax</th>
+                        <td>
+                          <i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.netProfitBeforeTax}}</i>
+                        </td>
+                      </tr><br>
+                      <span><b>As at last end month:</b></span><br>
+                      <tr>
+                        <th scope="row" colspan="3">Values of Stock Held</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.stockValue}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Trade Debtor O/S</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.tradeDebtor}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Trade Creditor O/S</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.tradeCreditor}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Other Debts</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.otherDebts}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Paid up Capital</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.capitalPaid}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Countries of Operation</th>
+                        <td>
+                          <i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.countriesOperating}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Business Building</th>
+                        <td>
+                          <i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.address?.building}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Business Street/Road</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.address?.street}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Business County</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.address?.county}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Business Postal Address</th>
+                        <td>
+                          <i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.address?.postalAddress}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Business Postal Code</th>
+                        <td>
+                          <i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.address?.postalCode}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Contact Person Name</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.contactName}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Contact Person Email</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.contactEmail}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Contact Person Mobile</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[0].businessDetails?.contactMobile}}</i>
+                        </td>
+                      </tr>
+                    </section>
+                  </tbody>
+                </table>
+                <hr>
+
+                <!-- Applicant Details -->
+                <h5>Applicant Details Section</h5>
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Loan Specifics</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row" colspan="3">Title</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].title}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">First Name</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].firstName}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Middle Name</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].middleName}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Last Name</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].lastName}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Gender</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].gender}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Marital Status</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].firstName}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">National ID/Passport</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].id}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">KRA Pin</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].kraPin}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Nationality</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].nationality}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Date of Birth</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].dob.seconds}}</i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row" colspan="3">Social Media</th>
+                      <td><i>{{current.loanApplication.loanApplicationArray[1].kraPin}}</i>
+                      </td>
+                    </tr>
+
+                    <!-- Added Applicant -->
+                    <!-- <section *ngIf="current.loanApplication.loanApplicationArray[1].addedApplicants">
+                                        <span>Hey from added applicants</span>
+                                    </section> -->
+                  </tbody>
+                </table>
+
+                <!-- Loan Details -->
+                <h5>Loan Details Section</h5>
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Loan Specifics</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <section
+                      *ngIf="current.loanApplication.loanApplicationArray[2].loanFacilityType == 'Personal Loan'; else businessLoanSection">
+                      <tr>
+                        <th scope="row" colspan="3">Loan Facility Type</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].loanFacilityType}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Amount Borrowed</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].borrowAmount}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Purpose of Loan</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].loanPurpose}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Type of Loan</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].loanType}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Repayment Period</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].repaymentPeriod}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Do you have a loan with other institutions?
+                        </th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].otherInstitutions}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Applicant Copy of ID</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].idCopy}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Applicant Copy of KRA Certificate</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].kraCopy}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Applicant Passport Image</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].passportImg}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Applicant Latest 3 Months Payslips</th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].paySlips}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Applicant Letter of Introduction from
+                          Employer
+                        </th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].letterIntro}}</i>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" colspan="3">Applicant Letter of Undertaking from
+                          Employer
+                        </th>
+                        <td><i>{{current.loanApplication.loanApplicationArray[2].letterUndertaking}}</i>
+                        </td>
+                      </tr>
+                    </section>
+
+                    <ng-template #businessLoanSection>
+                      <h6>It's a business loan</h6>
+                    </ng-template>
+
+
+
+                    <!-- Added Applicant -->
+                    <!-- <section *ngIf="current.loanApplication.loanApplicationArray[1].addedApplicants">
+                                        <span>Hey from added applicants</span>
+                                    </section> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button [disabled]="sign.invalid && tc.invalid && this.applyLoan.idCopy.invalid && this.applyLoan.kraCopy.invalid
+                && this.applyLoan.passportImg.invalid && this.applyLoan.paySlips.invalid && this.applyLoan.letterIntro.invalid
+                && this.applyLoan.letterUndertaking.invalid && this.applyLoan.loanType.invalid && this.applyLoan.applicantTitle.invalid
+                && this.applyLoan.firstName.invalid && this.applyLoan.lastName.invalid && this.applyLoan.gender.invalid
+                && this.applyLoan.maritalStatus.invalid && this.applyLoan.id.invalid && this.applyLoan.applicantKraPin.invalid
+                && this.applyLoan.nationality.invalid && this.applyLoan.dob.invalid && this.applyLoan.loanTypeFacility.invalid
+                && this.applyLoan.borrowAmount.invalid && this.applyLoan.loanPurpose.invalid && this.applyLoan.repaymentPeriod.invalid
+                && this.applyLoan.otherInstitutions.invalid" type="submit" style="margin-left: 10px;">Submit
+                Application</button>
+            </div>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </form>
+
+  </div>
+  <div class="text-stepper">
+
+  </div>
+</div>

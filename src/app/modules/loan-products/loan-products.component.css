@@ -1,0 +1,80 @@
+.header {
+  font-weight: bold;
+}
+
+.content h5 {
+  font-weight: bold;
+}
+
+.content .text-danger {
+  color: red;
+}
+
+.content .asterix {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.content .content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.content .content-wrapper-2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.content .content-wrapper .details,
+.content .content-wrapper-2 .details {
+  padding: 10px;
+}
+
+.content .content-wrapper .details .subtype_details,
+.content .content-wrapper-2 .details .subtype_details {
+  margin: 5px 0 5px 0;
+}
+
+.content .content-wrapper .details .loan-subtype,
+.content .content-wrapper-2 .details .loan-subtype {
+  list-style: none;
+  font-weight: bold;
+}
+
+.content .content-wrapper .details .loan-subtype.second,
+.content .content-wrapper-2 .details .loan-subtype.second {
+  margin-top: 5px;
+}
+
+.content .content-wrapper .details .sub,
+.content .content-wrapper-2 .details .sub {
+  font-weight: bold;
+}
+
+.content .table-head {
+  font-weight: bold;
+}
+/*# sourceMappingURL=loan-products.component.css.map */

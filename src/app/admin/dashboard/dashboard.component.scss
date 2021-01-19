@@ -1,0 +1,93 @@
+@import "../../../color";
+@import "../../../shadow";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.hello-msg {
+    font-weight: bolder;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-drawer {
+    width: 250px;
+}
+
+mat-drawer-container {
+    height: 100%;
+}
+
+mat-drawer-content {
+    padding: 20px;
+
+    .admin-form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        .make-admin {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+            input[type="email"] {
+                padding: 5px 5px;
+                margin: 5px 0;
+                display: block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            input[type="submit"] {
+                margin: 5px 0 5px 5px;
+                padding: 5px 10px;
+                border: none;
+                font-weight: bolder;
+                border-radius: 4px;
+                color: white;
+                background-color: $primary;
+                opacity: 1;
+                cursor: pointer;
+
+                &:disabled {
+                    cursor: not-allowed;
+                    background: #ccc;
+                }
+            }
+        }
+
+        .error-msg {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            color: red;
+            margin-top: 0;
+        }
+        .success-msg {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #e9a238;
+            margin-top: 0;
+        }
+    }
+}
+
+.stats-cards {
+    .mat-card {
+        overflow: hidden;
+    }
+}

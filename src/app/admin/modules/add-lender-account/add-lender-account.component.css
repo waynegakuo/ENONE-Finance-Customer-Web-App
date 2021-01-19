@@ -1,0 +1,106 @@
+.text-danger {
+  color: red;
+}
+
+.asterix {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.is-invalid {
+  border: 5px solid yellow;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+h3 {
+  font-weight: bolder;
+}
+
+.content {
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  width: 100%;
+  border-top: #D8D8D8 1px solid;
+}
+
+.content input[type="submit"],
+.content input[type="button"] {
+  background-color: #017ac2;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-weight: bold;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.content input[type="submit"]:disabled,
+.content input[type="button"]:disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.content form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content form input[type="text"],
+.content form input[type="number"],
+.content form input[type="date"],
+.content form input[type="email"],
+.content form select,
+.content form option,
+.content form textarea {
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.content form .date-picker {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.content form .danger {
+  background-color: red;
+}
+/*# sourceMappingURL=add-lender-account.component.css.map */

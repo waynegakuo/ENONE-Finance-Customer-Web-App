@@ -1,0 +1,20 @@
+.text {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: space-between;
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .total {
+    font-size: 2em;
+  }
+
+  #feather {
+    color: green;
+    font-size: 4em;
+  }
+}

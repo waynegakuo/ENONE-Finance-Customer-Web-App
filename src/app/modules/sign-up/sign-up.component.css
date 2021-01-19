@@ -1,0 +1,213 @@
+.is-invalid {
+  border: 1px solid red !important;
+}
+
+.text-danger {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.content {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content .signup-section {
+  width: 50%;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 0 6px 2px #e4e4e4;
+          box-shadow: 0 0 6px 2px #e4e4e4;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  text-align: center;
+}
+
+.content .signup-section .head {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  background-color: #017ac2;
+  color: white;
+  height: 71px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 4px 4px 0px 0px;
+  margin-bottom: 10px;
+}
+
+.content .signup-section span {
+  font-weight: bolder;
+}
+
+.content .signup-section a {
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 11px 15px !important;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  background-color: #017ac2;
+}
+
+.content .signup-section a img {
+  width: 10%;
+  height: 10%;
+}
+
+.content .signup-section form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  padding: 1.5em;
+}
+
+.content .signup-section form label {
+  font-weight: bolder;
+}
+
+.content .signup-section form > input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
+}
+
+.content .signup-section form .error-msg {
+  display: block;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+  color: red;
+  margin-top: 0;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
+}
+
+.content .signup-section form button {
+  margin: 20px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 206px;
+  height: 36px;
+  border: none;
+  font-weight: bolder;
+  border-radius: 4px;
+  color: white;
+  background-color: #017ac2;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.content .signup-section form button:disabled {
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.content .signup-section .footer_item {
+  font-size: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #888888;
+}
+
+.content .signup-section .divider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content .signup-section span.separator {
+  margin: 0 6px 0 6px;
+  width: 6rem;
+  top: 0;
+  height: 1px;
+  background: #888888;
+  border-radius: 3px;
+}
+
+.content .signup-section .signin-google {
+  margin: 10px;
+  width: 106px;
+  height: 50px;
+  border: none;
+  font-weight: bolder;
+  border-radius: 4px;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.content .signup-section .signin-google svg {
+  width: 30px;
+  height: 30px;
+}
+/*# sourceMappingURL=sign-up.component.css.map */
