@@ -20,6 +20,14 @@ The following command will install angular-cli globally on your machine
 
     npm install -g @angular/cli
 
+## Installing Firebase CLI
+
+You can install the Firebase CLI using a method that matches your operating system, experience level, and/or use case.
+
+    npm install -g firebase-tools
+
+Follow the rest of the steps [here](https://firebase.google.com/docs/cli#windows-npm) which includes log-in to the project you will create later in these instructions.
+
 ## Cloning this project
 
 If you wish to have this project on your machine, use the following command:
@@ -71,11 +79,13 @@ This application's backend makes use of Firebase's powerful capabilities such as
 
 4. Click on "Continue" after the project is created. This will take you to your newly created project's Dashboard.
 
-5. ### Adding Firebase to your app
+5. Adding Firebase to your app
 
-   - On the Dashboard, click on the `</>` icon to get started on adding Firebase to this web application. Give it a nickname of your choice such as 'edge360-app'. Don't tick the checkbox on Firebase Hosting unless you plan on hosting the app on Firebase. Click on "Register App".
+   - On the Dashboard, click on the `</>` icon to get started on adding Firebase to this web application. Give it a nickname of your choice such as _edge360-app_. Don't tick the checkbox on Firebase Hosting unless you plan on hosting the app on Firebase. Click on "Register App".
    - On the "Add Firebase SDK section", within the `var firebaseConfig ={...}` section, copy the contents inside the curly braces `{}`.
    - Inside your `src` folder of this application, go to the `enviroments` folder, then `environment.prod.ts` file. Paste the contents initially copied from the Firebase SDK section, in the previous step, into the empty `firebaseConfig` object.
+
+**NB:** _If you would like to test your application locally and make use of Firebase, also paste the contents in step 5 inside the `environment.ts` file_
 
 6. On the left-hand-side panel, you will see the various tabs which will be vital to your app's performance and storage needs. Listed below are those that are relevant to this project:
 
@@ -84,12 +94,13 @@ This application's backend makes use of Firebase's powerful capabilities such as
    - [Storage](https://firebase.google.com/docs/storage/web/start): Any uploaded documents or images are stored here.
    - [Functions](https://firebase.google.com/docs/functions): Lets you automatically run backend code in response to events triggered by Firebase features and HTTPS requests.
 
-7. Click on `Authentication` and select `Get Started`. This will provide you with a page on 'Sign-in Method'. Hover over the "Email/Password" row and click on the pencil-like icon. On the small pop-up that will appear, click on the first toggle button to 'Enable' and click on 'Save'. This will enable the Email/Password sign-in method which is required for this application.
+7. Click on `Authentication` and select `Get Started`. This will provide you with a page on "Sign-in Method". Hover over the "Email/Password" row and click on the pencil-like icon. On the small pop-up that will appear, click on the first toggle button to "Enable" and click on "Save". This will enable the Email/Password sign-in method which is required for this application.
    NB: _Don't click on the 'Email link (passwordless sign-in)' toggle button_
 
-8. Click on `Cloud Firestore` and then click on "Create Database". A pop-up will appear which gives you the option of selecting either having the your data stored in 'production mode' or 'test mode'. For security purposes, select 'Start in production mode' which will lockdown our database by default; no one will be able to read or write to our database unless authorized to do so. Click on 'Next'. Select the 'Cloud Firestore location' of your choice and click 'Enable'.
+8. Click on `Cloud Firestore` and then click on "Create Database". A pop-up will appear which gives you the option of selecting either having the your data stored in 'production mode' or 'test mode'. For security purposes, select 'Start in production mode' which will lockdown our database by default; no one will be able to read or write to our database unless authorized to do so. Click on 'Next'. Select the "Cloud Firestore location" of your choice and click "Enable".
 
-   - After the database is set up, you will be provided with the view of the Cloud Firestore Dashboard. On the top, select the 'Rules' tab. The displayed playground allows you to edit the database rules to your liking. Below `match /{document=**} {allow read, write: if false;}`, paste the following:
+   - After the database is set up, you will be provided with the view of the Cloud Firestore Dashboard. On the top, click on the "Rules" tab. The displayed playground allows you to edit your database rules to your liking.
+     Below `match /{document=**} {allow read, write: if false;}`, paste the following:
 
    ```javascript
 
@@ -126,3 +137,18 @@ This application's backend makes use of Firebase's powerful capabilities such as
    }
 
    ```
+
+9. Click on `Functions` tab on the left-side panel. Firebase Functions is a requirement for this project for the purpose of creating admins upon invocation in the Admin Dashboard. It is therefore required for you to upgrade your project's billing plan to "Blaze" to be able to use Cloud Functions. Click on "Upgrade Project". If you need to know more about the plans, click on "See full plan details" after the pop-up appears. Select "Continue". This will take you to Google Cloud Platform to set up your billing. Select the country and click "Confirm". This will open a page that requires you to provide billing details. After providing the details, click "Confirm Purchase".
+
+**_Make sure your Firebase CLI is logged in with the Google account used to create the Firebase project. Also, make sure you selected the appropriate project for this application. Kindly refer to the Installation pre-requisites section for more_**
+
+10. Back in our application's terminal, run the following commands in particular order:
+    npm install firebase-functions
+    npm install firebase-admin
+    cd functions
+    npm run build
+    firebase deploy --only functions
+
+The commands above will install `firebase-functions` and `firebase-admin` dependencies, change directory to the `functions` folder and then build out the JavaScript files for the corresponding functions TypeScript file (can be found in functions>src>index.ts). The last command deploys your Cloud Functions onto your Firebase project.
+
+Designed & Built with :heart: by [Foondi Tech](http://foondi.tech/)
